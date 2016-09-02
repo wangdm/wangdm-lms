@@ -26,8 +26,11 @@
                     </div>
                     <div id="menubody${memu?counter}" class="menu-body collapse">
                         <ul class="menu-list">
-                            <li>Menu 1</li>
-                            <li>Menu 2</li>
+                            <#if memu.children??>
+                            <#list memu.children as children >
+                            <li>${children.name}</li>
+                            </#list>
+                            </#if>
                         </ul>
                     </div>
                 </div>
