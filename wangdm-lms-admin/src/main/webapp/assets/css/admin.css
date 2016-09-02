@@ -1,0 +1,133 @@
+body {
+    font-size: 13px;
+    font-family: 微软雅黑, Helvetica, STheiti, 宋体, Arial, Tahoma, sans-serif, serif;
+}
+
+#dashboard-top{
+	width:100%;
+	height:50px;
+}
+
+#dashboard-top .navbar{
+    background-image:linear-gradient(to bottom, #e8e8e8, #ffffff);
+    border:0px;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 0px;
+    border-radius: 0px;
+    min-height:50px;
+}
+
+#dashboard-footer{
+    width:100%;
+    height:30px;
+}
+
+#dashboard-footer .navbar{
+    margin-bottom: 0px;
+    border-radius: 0px;
+    min-height:30px;
+    border-top: 1px solid #cccccc;
+    background-image:linear-gradient(to top, #e8e8e8, #ffffff);
+}
+
+#copyright{
+    line-height:28px;
+    text-align:center;
+}
+
+#dashboard-center{
+	
+}
+
+#dashboard-menu{
+	float:left;
+	width:180px;
+	height:100%;
+}
+
+#dashboard-menu .panel-group{
+	height:100%;
+    margin-bottom: 0px;
+    border-right:1px solid #cccccc;
+    background-color:#f0f0f0;
+}
+
+#dashboard-menu .panel{
+	border-width:0px;
+    margin-top: 0px;
+    border-radius: 0px;
+}
+
+#dashboard-menu .menu-head{
+	color:#555555;
+    width:100%;
+    background-image:linear-gradient(to top, #f0f0f0, #ffffff);
+    border-bottom: 1px solid #bbbbbb;
+    line-height:39px;
+    padding-left:10px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:default;
+}
+
+#dashboard-menu .menu-head:hover{
+    background-image:linear-gradient(to top, #ffc78e, #ffffff);
+}
+
+#dashboard-menu .menu-body{
+    width:100%;
+}
+
+#dashboard-menu .menu-list{
+    width:100%;
+    margin:0px;
+    padding:0px;
+    list-style-type:none;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+#dashboard-menu .menu-list li{
+    margin:0px;
+    padding:8px 20px;
+    cursor:pointer;
+}
+
+#dashboard-menu .menu-list li:hover{
+	background-color:#e8e8e8;
+}
+
+#dashboard-body{
+    float:left;
+    height:100%;
+}
+
+#dashboard-tab{
+	
+}
+
+#dashboard-tab ul.nav{
+	padding-left:10px;
+	border-bottom: 1px solid #ccc;
+}
+
+#dashboard-tab ul.nav li{
+    padding-top:3px;
+    margin-right: 4px;
+}
+
+#dashboard-tab .nav li a{
+    padding:5px 15px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    background-image:linear-gradient(to top, #f2f2f2, #ffffff);
+}
+
+#dashboard-tab .nav li.active a{
+    background-color: #fff;
+    background-image: none;
+    border-bottom: 1px solid transparent;
+}
+
+#dashboard-content{
+	
+}

@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Wangdm LMS Admin Panel</title>
+<title>404</title>
 </head>
 <body>
+    页面未找到 ${hello}
 </body>
 </html>

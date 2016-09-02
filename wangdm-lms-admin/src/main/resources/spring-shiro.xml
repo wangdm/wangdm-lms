@@ -73,6 +73,6 @@
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     
     <!-- Define the Shiro Realm implementation you want to use to connect to your back-end -->
-    <bean id="myRealm" class="com.wangdm.test.shiro.MyShiroRealm" />
+    <bean id="myRealm" class="com.wangdm.lms.admin.shiro.MyShiroRealm" /> 
 
 </beans>
