@@ -7,8 +7,13 @@ $(function(){
 	$("ul.menu-list").on("click","li", function(){
 		var title = $(this).html();
 		var url = $(this).data("action");
-		console.log("click "+title);
-		addTab(title,url);
+		var id = $(this).data("menu");
+		var href = "#menu"+id+"tab";
+		if($("#dashboard-tab  a[href=\""+href+"\"]").size()>=1){
+			$("#dashboard-tab  a[href=\""+href+"\"]").tab("show");
+		}else{
+			addTab(id,title,url);
+		}
 	});
 });
 
@@ -27,9 +32,10 @@ function resizeAdmin(){
 	
 }
 
-function addTab(title,url){
-	var str = "<li role=\"presentation\"><a href=\"#settings\" aria-controls=\"settings\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>";
+function addTab(id,title,url){
+	var str = "<li role=\"presentation\"><a href=\"#menu"+id+"tab\" aria-controls=\"menu"+id+"tab\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>";
 	$("#dashboard-tab ul.nav").append(str);
+	$("#dashboard-tab  a[href=\"#menu"+id+"tab\"]").tab("show");
 }
 
 function refreshTab(){}
