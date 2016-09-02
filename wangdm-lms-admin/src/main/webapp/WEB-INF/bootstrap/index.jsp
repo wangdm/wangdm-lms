@@ -29,7 +29,7 @@
                         <ul class="menu-list">
                             <#if memu.children??>
                             <#list memu.children as children >
-                            <li data-menu="${children.id}">${children.name}</li>
+                            <li data-menu="${children.id}" data-action="${children.url}">${children.name}</li>
                             </#list>
                             </#if>
                         </ul>
@@ -43,12 +43,19 @@
         <div id="dashboard-body">
         
             <div id="dashboard-tab">
-				<ul class="nav nav-tabs" role="tablist">
-				  <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-				</ul>
+                <div class="tab-list">
+					<ul class="nav nav-tabs" role="tablist">
+					    <li role="presentation" class="active" data-url="home"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+					</ul>
+                </div>
+				<div class="tab-action">
+                    <span class="action-refresh"><i class="iconfont">&#xe60e;</i></span>
+				    <span class="action-delete"><i class="iconfont">&#xe610;</i></span>
+				</div>
             </div>
             
-            <div id="dashboard-content">
+            <div id="dashboard-content" class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">home</div>
             </div>
             
         </div>

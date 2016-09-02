@@ -102,12 +102,23 @@ body {
 }
 
 #dashboard-tab{
-	
+    border-bottom: 1px solid #ccc;
+    position:relative;
+    float:left;
+    width:100%;
+    padding-right:80px;
+}
+
+#dashboard-tab .tab-list{
+    float:left;
 }
 
 #dashboard-tab ul.nav{
 	padding-left:10px;
-	border-bottom: 1px solid #ccc;
+}
+
+#dashboard-tab ul.nav-tabs{
+    border-bottom: 0px solid #ccc;
 }
 
 #dashboard-tab ul.nav li{
@@ -128,6 +139,31 @@ body {
     border-bottom: 1px solid transparent;
 }
 
+#dashboard-tab .tab-action{
+	position:absolute;
+	right:10px;
+    top:0px;
+	float:left;
+	line-height:30px;
+}
+
+#dashboard-tab .tab-action span{
+	padding:5px 3px 3px;
+	cursor:pointer;
+	border:1px solid transparent;
+}
+
+#dashboard-tab .tab-action span:hover{
+    color:#ff0000;
+    border:1px solid #dddddd;
+}
+
+#dashboard-tab .tab-action span i.iconfont{
+    font-size:18px;
+}
+
 #dashboard-content{
-	
+    float:left;
+    width:100%;
+    padding:20px 30px;
 }
