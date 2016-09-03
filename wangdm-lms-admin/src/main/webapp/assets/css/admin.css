@@ -156,7 +156,9 @@ body {
     text-align:center;
 }
 
-#dashboard-menu .menu-bar .menu-item:hover .menu-btn{
+#dashboard-menu .menu-bar .menu-item:hover .menu-btn,
+#dashboard-menu .menu-bar .showmenu:hover
+{
     background-color:#fff;
     border:1px solid #bbb;
 }
