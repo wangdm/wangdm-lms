@@ -42,8 +42,8 @@ function resizeAdmin(){
 	$("#dashboard-center").css("max-height",centerHeight);
 	
 	var menubodyHeight = centerHeight - ($("#dashboard-menu .menu-head").height()+1)*$("#dashboard-menu .menu-head").size()+1;
-	$("#dashboard-menu .menu-list").css("height",menubodyHeight);
-	$("#dashboard-menu .menu-list").css("max-height",menubodyHeight);
+	$("#dashboard-menu .menu-group .menu-list").css("height",menubodyHeight);
+	$("#dashboard-menu .menu-group .menu-list").css("max-height",menubodyHeight);
 	
 	var bodyWidth = $(window).width()-$("#dashboard-menu").width();
 	$("#dashboard-body").css("width",bodyWidth);

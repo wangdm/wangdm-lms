@@ -20,7 +20,19 @@
                 <div class="menu-btn showmenu"><i class="iconfont">&#xe624;</i></div>
                 <#if memulist??>
                 <#list memulist as memu >
-                <div class="menu-btn"><i class="iconfont">${memu.icon}</i></div>
+                <div class="menu-item">
+	                <div class="menu-btn"><i class="iconfont">${memu.icon}</i></div>
+                    <#if memu.children??>
+	                <div class="menu-body">
+	                    <div class="bar-blank"></div>
+	                    <ul class="menu-list">
+	                        <#list memu.children as children >
+	                        <li data-menu="${children.id}" data-action="${children.url}">${children.name}</li>
+	                        </#list>
+	                    </ul>
+	                </div>
+                    </#if>
+	            </div>
                 </#list>
                 </#if>
             </div>
