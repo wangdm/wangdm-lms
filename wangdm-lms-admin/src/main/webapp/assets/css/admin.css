@@ -47,7 +47,7 @@ body {
 	height:100%;
 }
 
-#dashboard-menu .panel-group{
+#dashboard-menu .menu-group{
 	height:100%;
     margin-bottom: 0px;
     border-right:1px solid #cccccc;
@@ -57,6 +57,7 @@ body {
 #dashboard-menu .panel{
 	border-width:0px;
     margin-top: 0px;
+    margin-bottom: 0;
     border-radius: 0px;
 }
 
@@ -80,7 +81,7 @@ body {
     width:100%;
 }
 
-#dashboard-menu .menu-list{
+#dashboard-menu .menu-group .menu-list{
     width:100%;
     margin:0px;
     padding:0px;
@@ -88,13 +89,13 @@ body {
     border-bottom: 1px solid #bbbbbb;
 }
 
-#dashboard-menu .menu-list li{
+#dashboard-menu .menu-group .menu-list li{
     margin:0px;
     padding:8px 20px;
     cursor:pointer;
 }
 
-#dashboard-menu .menu-list li:hover{
+#dashboard-menu .menu-group .menu-list li:hover{
 	background-color:#e8e8e8;
 }
 
@@ -124,7 +125,7 @@ body {
     border:1px solid #bbb;
 }
 
-#dashboard-menu .button-bar{
+#dashboard-menu .menu-bar{
 	padding:10px 4px 4px;
     height:100%;
     display:none;
@@ -133,7 +134,7 @@ body {
     background-color:#f0f0f0;
 }
 
-#dashboard-menu .button-bar .menu-btn{
+#dashboard-menu .menu-bar .menu-btn{
 	float:left;
 	cursor:pointer;
     margin:4px 0px;
@@ -143,12 +144,12 @@ body {
     border:1px solid transparent;
 }
 
-#dashboard-menu .button-bar .menu-btn i{
+#dashboard-menu .menu-bar .menu-btn i{
     font-size:20px;
     text-align:center;
 }
 
-#dashboard-menu .button-bar .menu-btn:hover{
+#dashboard-menu .menu-bar .menu-btn:hover{
     background-color:#fff;
     border:1px solid #bbb;
 }

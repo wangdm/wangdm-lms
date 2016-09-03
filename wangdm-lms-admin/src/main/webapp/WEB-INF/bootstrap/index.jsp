@@ -16,7 +16,7 @@
     <div id="dashboard-center">
     
         <div id="dashboard-menu">
-            <div class="button-bar">
+            <div class="menu-bar">
                 <div class="menu-btn showmenu"><i class="iconfont">&#xe624;</i></div>
                 <#if memulist??>
                 <#list memulist as memu >
@@ -24,7 +24,7 @@
                 </#list>
                 </#if>
             </div>
-            <div class="panel-group" id="accordion">
+            <div class="menu-group" id="accordion">
                 <div class="panel">
                     <div class="menu-head" data-toggle="collapse" data-parent="#accordion" data-target="" aria-expanded="false">
                         <span>
