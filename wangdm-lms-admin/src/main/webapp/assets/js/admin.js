@@ -4,6 +4,11 @@ $(function(){
 		resizeAdmin();
 	});
 	
+	var menuType = $.cookie("menu-type");
+	if(menuType=="menu-bar"){
+		showFullMenu(false);
+	}
+	
 	$("ul.menu-list").on("click","li", function(){
 		var title = $(this).html();
 		var url = $(this).data("action");
@@ -17,20 +22,10 @@ $(function(){
 	});
 	
 	$("#dashboard-menu .hiddenmenu").on("click",function(){
-		$("#dashboard-menu .menu-group").hide();
-		$("#dashboard-menu").width(40);
-		var bodyWidth = $(window).width()-$("#dashboard-menu").width();
-		$("#dashboard-body").css("width",bodyWidth);
-		$("#dashboard-body").css("max-width",bodyWidth);
-		$("#dashboard-menu .menu-bar").show();
+		showFullMenu(false);
 	});
 	$("#dashboard-menu .showmenu").on("click",function(){
-		$("#dashboard-menu .menu-bar").hide();
-		$("#dashboard-menu").width(180);
-		var bodyWidth = $(window).width()-$("#dashboard-menu").width();
-		$("#dashboard-body").css("width",bodyWidth);
-		$("#dashboard-body").css("max-width",bodyWidth);
-		$("#dashboard-menu .menu-group").show();
+		showFullMenu(true);
 	});
 	
 	$("#dashboard-tab span.action-refresh").on("click",function(){
@@ -54,6 +49,25 @@ function resizeAdmin(){
 	$("#dashboard-body").css("width",bodyWidth);
 	$("#dashboard-body").css("max-width",bodyWidth);
 	
+}
+
+function showFullMenu(show){
+	var width = 180;
+	if(show){
+		width = 180;
+		$("#dashboard-menu .menu-bar").hide();
+		$("#dashboard-menu .menu-group").show();
+		$.cookie("menu-type", "menu-group");
+	}else{
+		width = 40;
+		$("#dashboard-menu .menu-bar").show();
+		$("#dashboard-menu .menu-group").hide();
+		$.cookie("menu-type", "menu-bar");
+	}
+	var bodyWidth = $(window).width()-width;
+	$("#dashboard-menu").width(width);
+	$("#dashboard-body").css("width",bodyWidth);
+	$("#dashboard-body").css("max-width",bodyWidth);
 }
 
 function addTab(id,title,url){

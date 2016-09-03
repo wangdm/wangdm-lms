@@ -5,4 +5,5 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/assets/css/admin.css"/>
 <script type="text/javascript" src="${contextPath}/assets/js/jquery.js"></script>
 <script type="text/javascript" src="${contextPath}/assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="${contextPath}/assets/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="${contextPath}/assets/js/admin.js"></script>
