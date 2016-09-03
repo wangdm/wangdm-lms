@@ -16,14 +16,32 @@
     <div id="dashboard-center">
     
         <div id="dashboard-menu">
+            <div class="button-bar">
+                <div class="menu-btn showmenu"><i class="iconfont">&#xe624;</i></div>
+                <#if memulist??>
+                <#list memulist as memu >
+                <div class="menu-btn"><i class="iconfont">${memu.icon}</i></div>
+                </#list>
+                </#if>
+            </div>
             <div class="panel-group" id="accordion">
+                <div class="panel">
+                    <div class="menu-head" data-toggle="collapse" data-parent="#accordion" data-target="" aria-expanded="false">
+                        <span>
+                            <i class="iconfont">&#xe605;</i> 导航菜单
+                        </span>
+                        <span class="arrow arrowright hiddenmenu"><i class="iconfont">&#xe625;</i></span>
+                    </div>
+                </div>
                 <#if memulist??>
                 <#list memulist as memu >
                 <div class="panel">
-                    <div class="menu-head" data-toggle="collapse" data-parent="#accordion" data-target="#menubody${memu?counter}">
+                    <div class="menu-head" data-toggle="collapse" data-parent="#accordion" data-target="#menubody${memu?counter}" aria-expanded="false">
                         <span>
                             <i class="iconfont">${memu.icon}</i> ${memu.name}
                         </span>
+                        <span class="arrow arrowup"><i class="iconfont">&#xe61e;</i></span>
+                        <span class="arrow arrowbottom"><i class="iconfont">&#xe623;</i></span>
                     </div>
                     <div id="menubody${memu?counter}" class="menu-body collapse">
                         <ul class="menu-list">
@@ -49,8 +67,8 @@
 					</ul>
                 </div>
 				<div class="tab-action">
-                    <span class="action-refresh"><i class="iconfont">&#xe60e;</i></span>
-				    <span class="action-delete"><i class="iconfont">&#xe610;</i></span>
+                    <span role="button" class="action-refresh"><i class="iconfont">&#xe60e;</i></span>
+				    <span role="button" class="action-delete"><i class="iconfont">&#xe610;</i></span>
 				</div>
             </div>
             

@@ -16,6 +16,23 @@ $(function(){
 		}
 	});
 	
+	$("#dashboard-menu .hiddenmenu").on("click",function(){
+		$("#dashboard-menu .panel-group").hide();
+		$("#dashboard-menu").width(40);
+		var bodyWidth = $(window).width()-$("#dashboard-menu").width();
+		$("#dashboard-body").css("width",bodyWidth);
+		$("#dashboard-body").css("max-width",bodyWidth);
+		$("#dashboard-menu .button-bar").show();
+	});
+	$("#dashboard-menu .showmenu").on("click",function(){
+		$("#dashboard-menu .button-bar").hide();
+		$("#dashboard-menu").width(180);
+		var bodyWidth = $(window).width()-$("#dashboard-menu").width();
+		$("#dashboard-body").css("width",bodyWidth);
+		$("#dashboard-body").css("max-width",bodyWidth);
+		$("#dashboard-menu .panel-group").show();
+	});
+	
 	$("#dashboard-tab span.action-refresh").on("click",function(){
 		refreshTab();
 	});

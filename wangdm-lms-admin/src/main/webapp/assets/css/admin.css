@@ -1,5 +1,7 @@
 body {
     font-size: 13px;
+    overflow-y:hidden;
+    overflow-x:hidden;
     font-family: 微软雅黑, Helvetica, STheiti, 宋体, Arial, Tahoma, sans-serif, serif;
 }
 
@@ -94,6 +96,61 @@ body {
 
 #dashboard-menu .menu-list li:hover{
 	background-color:#e8e8e8;
+}
+
+#dashboard-menu .arrow{
+	padding:0px 6px;
+	float:right;
+	font-weight:normal;
+}
+
+#dashboard-menu div[aria-expanded="false"] .arrowup{
+	display:none;
+}
+
+#dashboard-menu div[aria-expanded="true"] .arrowup{
+    display:inline;
+}
+
+#dashboard-menu div[aria-expanded="false"] .arrowbottom{
+    display:inline;
+}
+
+#dashboard-menu div[aria-expanded="true"] .arrowbottom{
+    display:none;
+}
+
+#dashboard-menu .hiddenmenu:hover i{
+    border:1px solid #bbb;
+}
+
+#dashboard-menu .button-bar{
+	padding:10px 4px 4px;
+    height:100%;
+    display:none;
+    margin-bottom: 0px;
+    border-right:1px solid #cccccc;
+    background-color:#f0f0f0;
+}
+
+#dashboard-menu .button-bar .menu-btn{
+	float:left;
+	cursor:pointer;
+    margin:4px 0px;
+    padding:2px 5px;
+	font-size:20px;
+	border-radius:5px;
+    border:1px solid transparent;
+}
+
+#dashboard-menu .button-bar .menu-btn i{
+    font-size:20px;
+    text-align:center;
+}
+
+#dashboard-menu .button-bar .menu-btn:hover{
+    background-color:#fff;
+    border:1px solid #bbb;
 }
 
 #dashboard-body{
