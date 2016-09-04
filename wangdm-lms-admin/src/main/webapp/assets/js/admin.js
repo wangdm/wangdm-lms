@@ -8,7 +8,8 @@ $(function(){
 	if(menuType=="menu-bar"){
 		showFullMenu(false);
 	}
-	
+
+	addTab(10,"用户组管理","listgroup");
 	$("ul.menu-list").on("click","li", function(){
 		var title = $(this).html();
 		var url = $(this).data("action");

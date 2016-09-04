@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/bootstrap/action-listgroup.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/bootstrap/index.jsp=UTF-8
+encoding//src/main/webapp/assets/css/admin.css=UTF-8
 encoding/<project>=UTF-8
