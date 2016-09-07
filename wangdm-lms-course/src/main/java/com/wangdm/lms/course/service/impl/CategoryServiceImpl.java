@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wangdm.core.dao.BaseDao;
 import com.wangdm.core.dto.Dto;
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.Query;
+import com.wangdm.core.service.BaseService;
 import com.wangdm.lms.course.dto.AttributeDto;
 import com.wangdm.lms.course.dto.CategoryDto;
 import com.wangdm.lms.course.entity.AttributeName;
@@ -20,7 +21,7 @@ import com.wangdm.lms.course.service.CategoryService;
 
 @Service("categoryServie")
 @Transactional
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl extends BaseService<Category> implements CategoryService {
     
     @Autowired
     BaseDao<Category> categoryDao;
@@ -60,14 +61,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(Serializable id) {
-        categoryDao.delete(id);
+        categoryDao.delete(Category.class, id);
 
     }
 
     @Override
     public CategoryDto findById(Serializable id) {
         CategoryDto catDto = new CategoryDto();
-        Category category = categoryDao.findById(id);
+        Category category = categoryDao.findById(Category.class, id);
         if(category!=null)
         {
             catDto.fromEntity(category);
@@ -77,7 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Dto> query(BaseQuery query) {
+    public List<Dto> query(Query query) {
         // TODO Auto-generated method stub
         return null;
     }

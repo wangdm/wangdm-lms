@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.wangdm.core.dto.Dto;
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.Query;
+import com.wangdm.core.service.BaseService;
 import com.wangdm.lms.course.dto.CategoryDto;
+import com.wangdm.lms.course.entity.Course;
 import com.wangdm.lms.course.service.CourseService;
 
-public class CourseServiceImpl implements CourseService {
+public class CourseServiceImpl extends BaseService<Course> implements CourseService {
 
     @Override
     public Serializable create(Dto dto) {
@@ -31,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Dto> query(BaseQuery query) {
+    public List<Dto> query(Query query) {
         return null;
     }
 
