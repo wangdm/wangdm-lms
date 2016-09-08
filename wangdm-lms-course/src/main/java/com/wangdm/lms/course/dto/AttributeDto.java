@@ -14,6 +14,11 @@ public class AttributeDto extends BaseDto {
     
     private Set<String> attriValue;
 
+    @Override
+    public Long getEntityId() {
+        return Long.valueOf(attriId);
+    }
+
     public String getAttriId() {
         return attriId;
     }
@@ -41,7 +46,6 @@ public class AttributeDto extends BaseDto {
     @Override
     public Entity toEntity(Class<?> clazz) {
         AttributeName attriName = new AttributeName();
-        attriName.setId(Long.valueOf(this.getAttriId()));
         attriName.setName(this.getAttriName());
         return attriName;
     }

@@ -10,6 +10,11 @@ public class CourseAttributeDto extends BaseDto {
     
     private String attriValue;
 
+    @Override
+    public Long getEntityId() {
+        return Long.valueOf(id);
+    }
+
     public String getId() {
         return id;
     }

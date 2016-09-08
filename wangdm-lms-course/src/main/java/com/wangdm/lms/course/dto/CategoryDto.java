@@ -16,6 +16,11 @@ public class CategoryDto extends BaseDto {
     
     private List<AttributeDto> attributrs;
 
+    @Override
+    public Long getEntityId() {
+        return Long.valueOf(catId);
+    }
+
     public String getCatId() {
         return catId;
     }
@@ -51,7 +56,6 @@ public class CategoryDto extends BaseDto {
     @Override
     public Entity toEntity(Class<?> clazz) {
         Category category = new Category();
-        category.setId(Long.valueOf(this.getCatId()));
         category.setName(this.getCatName());
         category.setIndex(Integer.valueOf(this.getCatIdx()));
         return category;

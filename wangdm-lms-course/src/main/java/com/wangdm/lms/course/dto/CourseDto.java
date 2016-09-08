@@ -18,6 +18,11 @@ public class CourseDto extends BaseDto {
     
     private List<CourseAttributeDto> attributes;
 
+    @Override
+    public Long getEntityId() {
+        return Long.valueOf(courseId);
+    }
+
     public String getCourseId() {
         return courseId;
     }

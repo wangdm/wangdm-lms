@@ -24,4 +24,9 @@ public class StatusDto extends BaseDto {
 		this.message = message;
 	}
 
+    @Override
+    public Long getEntityId() {
+        return null;
+    }
+
 }
