@@ -293,6 +293,12 @@ body {
     padding: 15px 15px;
 }
 
+#dashboard-content iframe{
+    height: 100%;
+    width: 100%;
+    padding: 15px 15px;
+}
+
 .datagrid {
     float:left;
     width:100%;

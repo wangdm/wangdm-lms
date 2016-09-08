@@ -85,7 +85,9 @@
             </div>
             
             <div id="dashboard-content" class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="home">home</div>
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <iframe src="index" frameborder="0"></iframe>
+                </div>
             </div>
             
         </div>

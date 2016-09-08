@@ -33,6 +33,14 @@ public class AdminController {
         return mv;
     }
     
+    @RequestMapping(value="/index", method=RequestMethod.GET)
+    private ModelAndView listGroup(){
+
+        ModelAndView mv = new ModelAndView("action-index");
+        
+        return mv;
+    }
+    
     @RequestMapping(value="login",method=RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView("login");
