@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<#include "action-head.jsp">
+<title></title>
+</head>
+<body>
 <div class="datagrid">
     <div class="panel panel-default">
         <div class="panel-heading">Panel heading without title</div>
@@ -40,3 +48,6 @@
         </div>
     </div>
 </div>
+
+</body>
+</html>

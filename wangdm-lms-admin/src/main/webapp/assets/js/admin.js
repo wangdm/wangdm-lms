@@ -9,7 +9,7 @@ $(function(){
 		showFullMenu(false);
 	}
 
-	addTab(10,"用户组管理","listgroup");
+	addTab(16,"用户组管理","listgroup");
 	$("ul.menu-list").on("click","li", function(){
 		var title = $(this).html();
 		var url = $(this).data("action");
@@ -49,6 +49,10 @@ function resizeAdmin(){
 	var bodyWidth = $(window).width()-$("#dashboard-menu").width();
 	$("#dashboard-body").css("width",bodyWidth);
 	$("#dashboard-body").css("max-width",bodyWidth);
+    
+    var contentHeight = $("#dashboard-body").height() - $("#dashboard-tab").height();
+    $("#dashboard-content").css("height",contentHeight);
+    $("#dashboard-content").css("max-height",contentHeight);
 	
 }
 
@@ -74,18 +78,10 @@ function showFullMenu(show){
 function addTab(id,title,url){
 	var menu = "menu"+id+"tab";
 	var tabStr = "<li role=\"presentation\" data-url=\""+url+"\"><a href=\"#"+menu+"\" aria-controls=\""+menu+"\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>";
-	var contentStr = "<div role=\"tabpanel\" class=\"tab-pane\" id=\""+menu+"\"></div>";
+	var contentStr = "<div role=\"tabpanel\" class=\"tab-pane\" id=\""+menu+"\"><iframe src=\""+url+"\" frameborder=\"0\"></iframe></div>";
 	$("#dashboard-tab ul.nav").append(tabStr);
 	$("#dashboard-content").append(contentStr);
 	$("#dashboard-tab  a[href=\"#"+menu+"\"]").tab("show");
-	$.ajax({
-		"url":url,
-        "type": "get"
-	}).success(function(data){
-		$("#dashboard-content div[id='"+menu+"']").html(data);
-	}).fail(function(data){
-		console.log("connect "+this.url+" failed with "+data);
-	});
 }
 
 function refreshTab(){
