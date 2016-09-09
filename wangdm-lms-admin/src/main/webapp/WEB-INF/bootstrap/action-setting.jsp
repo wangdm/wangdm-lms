@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "action-head.jsp">
 <title></title>
-<title></title>
 </head>
 <body>
 

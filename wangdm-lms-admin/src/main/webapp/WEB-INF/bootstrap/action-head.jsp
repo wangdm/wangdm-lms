@@ -6,3 +6,4 @@
 <script type="text/javascript" src="${contextPath}/assets/js/jquery.js"></script>
 <script type="text/javascript" src="${contextPath}/assets/js/bootstrap.js"></script>
 <script type="text/javascript" src="${contextPath}/assets/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="${contextPath}/assets/js/content.js"></script>
