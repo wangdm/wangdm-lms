@@ -2,7 +2,7 @@ package com.wangdm.lms.course.dto;
 
 import com.wangdm.core.dto.BaseDto;
 
-public class CourseAttributeDto extends BaseDto {
+public class AttributeMapDto extends BaseDto {
     
     private String id;
     

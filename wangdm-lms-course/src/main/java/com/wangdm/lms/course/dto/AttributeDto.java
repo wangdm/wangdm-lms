@@ -1,6 +1,6 @@
 package com.wangdm.lms.course.dto;
 
-import java.util.Set;
+import java.util.Map;
 
 import com.wangdm.core.dto.BaseDto;
 import com.wangdm.core.entity.Entity;
@@ -12,7 +12,7 @@ public class AttributeDto extends BaseDto {
     
     private String attriName;
     
-    private Set<String> attriValue;
+    private Map<String,String> attriValues;
 
     @Override
     public Long getEntityId() {
@@ -35,12 +35,12 @@ public class AttributeDto extends BaseDto {
         this.attriName = attriName;
     }
 
-    public Set<String> getAttriValue() {
-        return attriValue;
+    public Map<String,String> getAttriValue() {
+        return attriValues;
     }
 
-    public void setAttriValue(Set<String> attriValue) {
-        this.attriValue = attriValue;
+    public void setAttriValue(Map<String,String> attriValue) {
+        this.attriValues = attriValue;
     }
 
     @Override

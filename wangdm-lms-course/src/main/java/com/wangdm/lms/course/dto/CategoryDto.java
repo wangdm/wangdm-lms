@@ -14,7 +14,7 @@ public class CategoryDto extends BaseDto {
     
     private String catIdx = "1";
     
-    private List<AttributeDto> attributrs;
+    private List<AttributeDto> attributes;
 
     @Override
     public Long getEntityId() {
@@ -45,12 +45,12 @@ public class CategoryDto extends BaseDto {
         this.catIdx = catIdx;
     }
 
-    public List<AttributeDto> getAttributrs() {
-        return attributrs;
+    public List<AttributeDto> getAttributes() {
+        return attributes;
     }
 
-    public void setAttributrs(List<AttributeDto> attributrs) {
-        this.attributrs = attributrs;
+    public void setAttributrs(List<AttributeDto> attributes) {
+        this.attributes = attributes;
     }
 
     @Override

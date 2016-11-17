@@ -2,6 +2,7 @@ package com.wangdm.lms.course.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,11 +18,11 @@ public class AttributeValue extends BaseEntity {
 	@Column(name="value", nullable=false, length=40)
     private String value;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="attributenameId")
     private AttributeName name;
 	
-	@Column(name="idx")
+	@Column(name="idx", nullable=false)
 	private Integer index = 0;
 
     public String getValue() {

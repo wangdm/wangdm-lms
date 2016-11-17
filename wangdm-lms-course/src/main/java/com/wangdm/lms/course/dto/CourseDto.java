@@ -16,7 +16,7 @@ public class CourseDto extends BaseDto {
     
     private String categoryName;
     
-    private List<CourseAttributeDto> attributes;
+    private List<AttributeMapDto> attributes;
 
     @Override
     public Long getEntityId() {
@@ -63,11 +63,11 @@ public class CourseDto extends BaseDto {
         this.categoryName = categoryName;
     }
 
-    public List<CourseAttributeDto> getAttributes() {
+    public List<AttributeMapDto> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(List<CourseAttributeDto> attributes) {
+    public void setAttributes(List<AttributeMapDto> attributes) {
         this.attributes = attributes;
     }
     

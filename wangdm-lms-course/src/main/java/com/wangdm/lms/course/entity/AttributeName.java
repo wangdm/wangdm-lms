@@ -1,9 +1,13 @@
 package com.wangdm.lms.course.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.wangdm.core.entity.BaseEntity;
@@ -17,12 +21,15 @@ public class AttributeName extends BaseEntity {
 	@Column(name="name", nullable=false, length=40)
     private String name;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="categoryId")
     private Category category;
 	
-	@Column(name="idx")
+	@Column(name="idx", nullable=false)
 	private Integer index = 0;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attributenameId")
+	private List<AttributeValue> valueList;
 
     public String getName() {
         return name;
@@ -46,6 +53,14 @@ public class AttributeName extends BaseEntity {
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public List<AttributeValue> getValueList() {
+        return valueList;
+    }
+
+    public void setValueList(List<AttributeValue> valueList) {
+        this.valueList = valueList;
     }
 
 }

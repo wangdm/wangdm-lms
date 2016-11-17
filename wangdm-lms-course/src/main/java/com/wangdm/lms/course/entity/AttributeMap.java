@@ -5,17 +5,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.wangdm.core.constant.EntityType;
 import com.wangdm.core.entity.BaseEntity;
 
 @Entity
-@Table(name = "courseattribute")
-public class CourseAttribute extends BaseEntity {
+@Table(name = "attributemap")
+public class AttributeMap extends BaseEntity {
 
     private static final long serialVersionUID = -6738467441407164502L;
 
 	@ManyToOne
-	@JoinColumn(name="courseId")
-    private Course course;
+	@JoinColumn(name="entitytype")
+    private EntityType entityType;
 
 	@ManyToOne
 	@JoinColumn(name="attributenameId")
@@ -25,12 +26,12 @@ public class CourseAttribute extends BaseEntity {
 	@JoinColumn(name="attributevalueId")
     private AttributeValue value;
 
-    public Course getCourse() {
-        return course;
+    public EntityType getEntityType() {
+        return entityType;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setEntityType(EntityType entityType) {
+        this.entityType = entityType;
     }
 
     public AttributeName getName() {
