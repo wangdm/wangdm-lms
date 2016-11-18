@@ -12,6 +12,8 @@ public class CourseDto extends BaseDto {
     
     private String status;
     
+    private String statusDesc;
+    
     private String categoryId;
     
     private String categoryName;
@@ -45,6 +47,14 @@ public class CourseDto extends BaseDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getStatusDesc() {
+        return statusDesc;
+    }
+
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
     }
 
     public String getCategoryId() {
