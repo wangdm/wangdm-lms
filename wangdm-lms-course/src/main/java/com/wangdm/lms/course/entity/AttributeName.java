@@ -20,13 +20,13 @@ public class AttributeName extends BaseEntity {
 	
 	@Column(name="name", nullable=false, length=40)
     private String name;
+    
+    @Column(name="idx", nullable=false)
+    private Integer index = 0;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="categoryId")
+	@JoinColumn(name="categoryId", nullable = false, updatable = false)
     private Category category;
-	
-	@Column(name="idx", nullable=false)
-	private Integer index = 0;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attributenameId")
 	private List<AttributeValue> valueList;
@@ -39,20 +39,20 @@ public class AttributeName extends BaseEntity {
         this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public Integer getIndex() {
         return index;
     }
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public List<AttributeValue> getValueList() {

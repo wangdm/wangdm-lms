@@ -14,16 +14,16 @@ import com.wangdm.core.entity.BaseEntity;
 public class AttributeValue extends BaseEntity {
 
     private static final long serialVersionUID = -274605136276226414L;
-	
-	@Column(name="value", nullable=false, length=40)
+
+    @Column(name = "value", nullable = false, length = 40)
     private String value;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="attributenameId")
+
+    @Column(name = "idx", nullable = false)
+    private Integer index = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attributenameId", nullable = false, updatable = false)
     private AttributeName name;
-	
-	@Column(name="idx", nullable=false)
-	private Integer index = 0;
 
     public String getValue() {
         return value;
@@ -33,19 +33,19 @@ public class AttributeValue extends BaseEntity {
         this.value = value;
     }
 
-    public AttributeName getName() {
-        return name;
-    }
-
-    public void setName(AttributeName name) {
-        this.name = name;
-    }
-
     public Integer getIndex() {
         return index;
     }
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public AttributeName getName() {
+        return name;
+    }
+
+    public void setName(AttributeName name) {
+        this.name = name;
     }
 }

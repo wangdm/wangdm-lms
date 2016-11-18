@@ -1,9 +1,13 @@
 package com.wangdm.lms.course.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.wangdm.core.entity.BaseEntity;
@@ -16,13 +20,16 @@ public class Category extends BaseEntity {
 	
 	@Column(name="name", nullable=false, length=40)
     private String name;
+    
+    @Column(name="idx", nullable=false)
+    private Integer index = 0;
 	
-	@ManyToOne
-	@JoinColumn(name="parentId")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="parentId", updatable = false)
     private Category parent;
-	
-	@Column(name="idx")
-	private Integer index = 0;
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Category> chileren;
 
     public String getName() {
         return name;
@@ -30,6 +37,14 @@ public class Category extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     public Category getParent() {
@@ -40,12 +55,12 @@ public class Category extends BaseEntity {
         this.parent = parent;
     }
 
-    public Integer getIndex() {
-        return index;
+    public List<Category> getChileren() {
+        return chileren;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
+    public void setChileren(List<Category> chileren) {
+        this.chileren = chileren;
     }
 	
 }
