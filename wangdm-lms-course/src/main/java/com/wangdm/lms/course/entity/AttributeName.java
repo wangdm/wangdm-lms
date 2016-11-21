@@ -28,7 +28,7 @@ public class AttributeName extends BaseEntity {
 	@JoinColumn(name="categoryId", nullable = false, updatable = false)
     private Category category;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attributenameId")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "attributenameId")
 	private List<AttributeValue> valueList;
 
     public String getName() {
