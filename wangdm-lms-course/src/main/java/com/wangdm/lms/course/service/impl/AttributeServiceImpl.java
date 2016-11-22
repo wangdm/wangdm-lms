@@ -1,16 +1,21 @@
 package com.wangdm.lms.course.service.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wangdm.core.constant.EntityStatus;
+import com.wangdm.core.constant.EntityType;
+import com.wangdm.core.constraint.Constraint;
+import com.wangdm.core.constraint.ConstraintFactory;
 import com.wangdm.core.dao.Dao;
 import com.wangdm.core.dto.Dto;
-import com.wangdm.core.query.Query;
 import com.wangdm.core.service.BaseService;
+import com.wangdm.lms.course.dto.AttributeMapDto;
 import com.wangdm.lms.course.dto.AttributeNameDto;
 import com.wangdm.lms.course.dto.AttributeValueDto;
 import com.wangdm.lms.course.entity.AttributeMap;
@@ -31,6 +36,9 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
     @Autowired
     Dao<AttributeMap> attributeMapDao;
     
+    @Autowired
+    private ConstraintFactory constraintFactory;
+    
     @Override
     public Serializable create(Dto dto) {
 
@@ -44,6 +52,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
             if(valueDtoList!=null && valueDtoList.size()>0){
                 for(AttributeValueDto attrValueDto : valueDtoList){
                     AttributeValue value = (AttributeValue)attrValueDto.toEntity(AttributeValue.class);
+                    value.setName(name);
                     attrValueDto.setId(attributeValueDao.create(value).toString());
                 }
             }
@@ -52,6 +61,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         return id;
     }
 
+    
     @Override
     public void update(Dto dto) {
 
@@ -79,6 +89,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         }
 
     }
+    
 
     @Override
     public void delete(Serializable id) {
@@ -91,6 +102,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         }
     }
 
+    
     @Override
     public AttributeNameDto findById(Serializable id) {
         
@@ -98,15 +110,101 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         if(name != null){
             AttributeNameDto dto = new AttributeNameDto();
             dto.fromEntity(name);
+            
+            List<AttributeValue> valueList = name.getValueList();
+            
+            if(valueList!=null && valueList.size()>0){
+                
+                List<AttributeValueDto> valueDtoList = new ArrayList<AttributeValueDto>(valueList.size());
+                for(AttributeValue value : valueList){
+                    AttributeValueDto valueDto = new AttributeValueDto();
+                    valueDto.fromEntity(value);
+                    valueDtoList.add(valueDto);
+                }
+                
+                dto.setValues(valueDtoList);
+            }
+            return dto;
         }
         
         return null;
     }
 
+    
     @Override
-    public List<Dto> query(Query query) {
-        // TODO Auto-generated method stub
-        return null;
+    public void addAttributeValue(Serializable id, List<String> values) {
+
+        AttributeName name = attributeNameDao.findById(AttributeName.class, id);
+        
+        if(values!=null && values.size()>0){
+            for(int i=0; i<values.size(); i++){
+                AttributeValue value = new AttributeValue();
+                value.setIndex(i);
+                value.setValue(values.get(i));
+                value.setName(name);
+                attributeValueDao.create(value);
+            }
+        }
+        
+    }
+
+    
+    @Override
+    public void delAttributeValue(List<Serializable> valueIds) {
+        
+        if(valueIds!=null && valueIds.size()>0){
+            for(int i=0; i<valueIds.size(); i++){
+                attributeValueDao.deleteById(valueIds.get(i));
+            }
+        }
+        
+    }
+
+    
+    @Override
+    public void editAttributeValue(List<AttributeValueDto> valueDtoList) {
+        
+        if(valueDtoList!=null && valueDtoList.size()>0){
+            
+            for(AttributeValueDto valueDto : valueDtoList){
+                
+                AttributeValue value = attributeValueDao.findById(AttributeValue.class, valueDto.getEntityId());
+                if(value != null){
+                    valueDto.toEntity(value);
+                    attributeValueDao.update(value);
+                }
+            }
+            
+        }
+        
+    }
+
+    
+    @Override
+    public List<AttributeMapDto> getEntityAttribute(Serializable entityId, EntityType entityType) {
+
+        Constraint constraint = constraintFactory.createConstraint(AttributeMap.class);
+        
+        constraint.addEqualCondition("entityType", entityType);
+        
+        constraint.addEqualCondition("entityId", entityId);
+        
+        constraint.addEqualCondition("status", EntityStatus.NORMAL);
+        
+        List<AttributeMap> entityList = attributeMapDao.findByConstraint(constraint);
+        if(entityList == null || entityList.size()<=0){
+            return null;
+        }
+        
+        List<AttributeMapDto> dtoList = new ArrayList<AttributeMapDto>(entityList.size());
+        for(AttributeMap entity : entityList){
+            AttributeMapDto dto = new AttributeMapDto();
+            dto.fromEntity(entity);
+            
+            dtoList.add(dto);
+        }
+        
+        return dtoList;
     }
 
 }
