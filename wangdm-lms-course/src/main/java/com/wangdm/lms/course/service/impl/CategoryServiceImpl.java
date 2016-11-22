@@ -13,9 +13,9 @@ import com.wangdm.core.constraint.Constraint;
 import com.wangdm.core.constraint.ConstraintFactory;
 import com.wangdm.core.constraint.Order.OrderType;
 import com.wangdm.core.dao.Dao;
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.service.BaseService;
 import com.wangdm.lms.course.dto.AttributeNameDto;
+import com.wangdm.lms.course.dto.AttributeValueDto;
 import com.wangdm.lms.course.dto.CategoryDto;
 import com.wangdm.lms.course.entity.AttributeName;
 import com.wangdm.lms.course.entity.AttributeValue;
@@ -33,9 +33,6 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
     Dao<AttributeName> attributeNameDao;
     
     @Autowired
-    Dao<AttributeValue> attributeValueDao;
-    
-    @Autowired
     private ConstraintFactory constraintFactory;
 
     @Override
@@ -44,8 +41,9 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 
     }
 
+    
 	@Override
-	public List<Dto> getChildren(Serializable id) {
+	public List<CategoryDto> getChildren(Serializable id) {
 
         Constraint constraint = constraintFactory.createConstraint(Category.class);
         
@@ -60,18 +58,45 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
             return null;
         }
         
-        List<Dto> dtoList = new ArrayList<Dto>(entityList.size());
+        List<CategoryDto> dtoList = new ArrayList<CategoryDto>(entityList.size());
         for(Category entity : entityList){
-            Dto dto = new CategoryDto();
+            CategoryDto dto = new CategoryDto();
             dto.fromEntity(entity);
             dtoList.add(dto);
         }
         
         return dtoList;
 	}
+    
+	
+    public List<CategoryDto> getAncestors(Serializable id){
 
+        Category leaf = categoryDao.findById(id);
+        if(leaf==null){
+            return null;
+        }
+        
+        List<Category> entityList = new ArrayList<Category>(5);
+        
+        recurseAncestors(entityList, leaf.getParent().getId());
+        
+        entityList.add(leaf);
+
+        List<CategoryDto> dtoList = new ArrayList<CategoryDto>(entityList.size());
+        for(Category entity : entityList){
+            
+            CategoryDto dto = new CategoryDto();
+            dto.fromEntity(entity);
+            
+            dtoList.add(dto);
+        }
+        
+        return dtoList;
+    }
+
+    
 	@Override
-	public List<Dto> getCategoryAttribute(Serializable id) {
+	public List<AttributeNameDto> getCategorySelfAttribute(Serializable id) {
 
         Constraint constraint = constraintFactory.createConstraint(AttributeName.class);
         
@@ -81,31 +106,121 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         
         constraint.addOrder("index", OrderType.ASC);
         
-        List<AttributeName> entityList = attributeNameDao.findByConstraint(constraint);
-        if(entityList == null || entityList.size()<=0){
+        List<AttributeName> nameList = attributeNameDao.findByConstraint(constraint);
+        if(nameList == null || nameList.size()<=0){
             return null;
         }
         
-        List<Dto> dtoList = new ArrayList<Dto>(entityList.size());
-        for(AttributeName entity : entityList){
-            Dto dto = new AttributeNameDto();
-            dto.fromEntity(entity);
-            dtoList.add(dto);
+        List<AttributeNameDto> dtoList = new ArrayList<AttributeNameDto>(nameList.size());
+        for(AttributeName nameEntity : nameList){
+            AttributeNameDto nameDto = new AttributeNameDto();
+            nameDto.fromEntity(nameEntity);
+            
+            if(nameEntity.getValueList()!=null){
+                List<AttributeValue> valueList = nameEntity.getValueList();
+                List<AttributeValueDto> valueDtoList = new ArrayList<AttributeValueDto>(valueList.size());
+                for(AttributeValue valueEntity : valueList){
+                    AttributeValueDto valueDto = new AttributeValueDto();
+                    valueDto.fromEntity(valueEntity);
+                    valueDtoList.add(valueDto);
+                }
+                nameDto.setValues(valueDtoList);
+            }
+            
+            dtoList.add(nameDto);
         }
         
         return dtoList;
 	}
 
+	
+    @Override
+    public List<AttributeNameDto> getCategoryAllAttribute(Serializable id) {
+
+        Category leaf = categoryDao.findById(id);
+        if(leaf==null){
+            return null;
+        }
+        
+        List<Category> entityList = new ArrayList<Category>(5);
+        
+        recurseAncestors(entityList, leaf.getParent().getId());
+        
+        entityList.add(leaf);
+
+        List<AttributeNameDto> dtoList = new ArrayList<AttributeNameDto>(entityList.size()*4);
+        for(Category entity : entityList){
+            
+            dtoList.addAll(this.getCategorySelfAttribute(entity.getId()));
+        }
+        
+        return dtoList;
+    }
+
+    
 	@Override
-	public List<Dto> getCategoryTree(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CategoryDto getCategoryTree(Serializable id) {
+
+	    Category root = categoryDao.findById(id);
+	    if(root==null){
+	        return null;
+	    }
+	    
+	    CategoryDto rootDto = new CategoryDto();
+	    rootDto.fromEntity(root);
+	    
+	    recurseChildren(rootDto, false);
+	    
+		return rootDto;
 	}
 
+	
 	@Override
-	public List<Dto> getCategoryTreeWithAttribute(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CategoryDto getCategoryTreeWithAttribute(Serializable id) {
+
+        Category root = categoryDao.findById(id);
+        if(root==null){
+            return null;
+        }
+        
+        CategoryDto rootDto = new CategoryDto();
+        rootDto.fromEntity(root);
+        
+        recurseChildren(rootDto, true);
+        
+        return rootDto;
 	}
+	
+	
+	private void recurseChildren(CategoryDto parentDto, boolean getAttr){
+	    
+	    List<CategoryDto> childrenDtoList = this.getChildren(parentDto.getEntityId());
+	    if(childrenDtoList==null || childrenDtoList.size()<=0){
+	        return;
+	    }
+	    
+	    for(CategoryDto dto : childrenDtoList){
+	        recurseChildren(dto, getAttr);
+	        
+	        if(getAttr){
+	            dto.setAttributes(this.getCategorySelfAttribute(dto.getEntityId()));
+	        }
+	    }
+	    
+	    parentDto.setChildren(childrenDtoList);
+	}
+    
+    
+    private void recurseAncestors(List<Category> entityList, Serializable id){
+
+        Category leaf = categoryDao.findById(id);
+        if(leaf==null){
+            return;
+        }
+        
+        recurseAncestors(entityList, leaf.getParent().getId());
+        
+        entityList.add(leaf);
+    }
 
 }
