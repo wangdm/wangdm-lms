@@ -17,19 +17,19 @@ import com.wangdm.core.entity.BaseEntity;
 public class Category extends BaseEntity {
 
     private static final long serialVersionUID = 257550356807785562L;
-	
-	@Column(name="name", nullable=false, length=40)
+    
+    @Column(name="name", nullable=false, length=40)
     private String name;
     
     @Column(name="idx", nullable=false)
     private Integer index = 0;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="parentId", updatable = false)
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="parentId", updatable = false, referencedColumnName="id")
     private Category parent;
     
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Category> chileren;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="parent")
+    private List<Category> children;
 
     public String getName() {
         return name;
@@ -55,12 +55,12 @@ public class Category extends BaseEntity {
         this.parent = parent;
     }
 
-    public List<Category> getChileren() {
-        return chileren;
+    public List<Category> getChildren() {
+        return children;
     }
 
-    public void setChileren(List<Category> chileren) {
-        this.chileren = chileren;
+    public void setChildren(List<Category> children) {
+        this.children = children;
     }
 	
 }

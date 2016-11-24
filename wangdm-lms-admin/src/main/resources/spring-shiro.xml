@@ -21,8 +21,8 @@
         <property name="securityManager" ref="securityManager"/>
         
         <property name="loginUrl" value="/login"/>
-        <property name="successUrl" value="/member"/>
-        <property name="unauthorizedUrl" value="/403"/>
+        <property name="successUrl" value="/"/>
+        <property name="unauthorizedUrl" value="/error/403"/>
         <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean  -->
         <!-- defined will be automatically acquired and available via its beanName in chain        -->
         <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
@@ -33,10 +33,12 @@
 <!--         </property> -->
         <property name="filterChainDefinitions">
             <value>
-                /member = authc
+                /error/** = anon
+                /assets/** = anon
+                /images/** = anon
                 /login = authc
                 /logout = logout
-                /admin = authc, roles[admin]
+                /** = authc, roles[admin]
                 /docs = authc, perms[document:read]
             </value>
         </property>
@@ -49,7 +51,7 @@
 <!--     <bean id="someFilter" class="..."/> -->
 <!--     <bean id="anotherFilter" class="..."></bean> -->
 
-<!--     缓存管理器 使用Ehcache实现   -->
+    <!-- 缓存管理器 使用Ehcache实现   -->
 <!--     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">   -->
 <!--         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>   -->
 <!--     </bean>   -->
