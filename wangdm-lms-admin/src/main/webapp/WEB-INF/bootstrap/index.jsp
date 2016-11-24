@@ -18,15 +18,15 @@
         <div id="dashboard-menu">
             <div class="menu-bar">
                 <div class="menu-btn showmenu"><i class="iconfont">&#xe624;</i></div>
-                <#if memulist??>
-                <#list memulist as memu >
+                <#if menulist??>
+                <#list menulist as menu >
                 <div class="menu-item">
-	                <div class="menu-btn"><i class="iconfont">${memu.icon}</i></div>
-                    <#if memu.children??>
+	                <div class="menu-btn"><i class="iconfont">${menu.icon}</i></div>
+                    <#if menu.children??>
 	                <div class="menu-body">
 	                    <div class="bar-blank"></div>
 	                    <ul class="menu-list">
-	                        <#list memu.children as children >
+	                        <#list menu.children as children >
 	                        <li data-menu="${children.id}" data-action="${children.url}">${children.name}</li>
 	                        </#list>
 	                    </ul>
@@ -45,20 +45,20 @@
                         <span class="arrow arrowright hiddenmenu"><i class="iconfont">&#xe625;</i></span>
                     </div>
                 </div>
-                <#if memulist??>
-                <#list memulist as memu >
+                <#if menulist??>
+                <#list menulist as menu >
                 <div class="panel">
-                    <div class="menu-head" data-toggle="collapse" data-parent="#accordion" data-target="#menubody${memu?counter}" aria-expanded="false">
+                    <div class="menu-head" data-toggle="collapse" data-parent="#accordion" data-target="#menubody${menu?counter}" aria-expanded="false">
                         <span>
-                            <i class="iconfont">${memu.icon}</i> ${memu.name}
+                            <i class="iconfont">${menu.icon}</i> ${menu.name}
                         </span>
                         <span class="arrow arrowup"><i class="iconfont">&#xe61e;</i></span>
                         <span class="arrow arrowbottom"><i class="iconfont">&#xe623;</i></span>
                     </div>
-                    <div id="menubody${memu?counter}" class="menu-body collapse">
+                    <div id="menubody${menu?counter}" class="menu-body collapse">
                         <ul class="menu-list">
-                            <#if memu.children??>
-                            <#list memu.children as children >
+                            <#if menu.children??>
+                            <#list menu.children as children >
                             <li data-menu="${children.id}" data-action="${children.url}">${children.name}</li>
                             </#list>
                             </#if>
