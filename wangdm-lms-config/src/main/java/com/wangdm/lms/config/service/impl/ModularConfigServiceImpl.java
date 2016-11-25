@@ -21,7 +21,7 @@ public class ModularConfigServiceImpl extends ConfigServiceImpl implements Modul
     @Override
     public String getWebHostUrl() {
 
-        return getConfig(KeyValue.webHostUrl, "/touchrnb-lms-web");
+        return getConfig(KeyValue.webHostUrl, "/wangdm-lms-web");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ModularConfigServiceImpl extends ConfigServiceImpl implements Modul
     @Override
     public String getMobileHostUrl() {
 
-        return getConfig(KeyValue.mobileHostUrl, "/touchrnb-lms-mobile");
+        return getConfig(KeyValue.mobileHostUrl, "/wangdm-lms-mobile");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ModularConfigServiceImpl extends ConfigServiceImpl implements Modul
     @Override
     public String getAdminHostUrl() {
 
-        return getConfig(KeyValue.adminHostUrl, "/touchrnb-lms-admin");
+        return getConfig(KeyValue.adminHostUrl, "/wangdm-lms-admin");
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ModularConfigServiceImpl extends ConfigServiceImpl implements Modul
     @Override
     public String getSdkHostUrl() {
 
-        return getConfig(KeyValue.sdkHostUrl, "/touchrnb-lms-sdk");
+        return getConfig(KeyValue.sdkHostUrl, "/wangdm-lms-sdk/v1");
     }
 
     @Override
