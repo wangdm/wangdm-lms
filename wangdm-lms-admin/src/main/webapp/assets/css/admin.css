@@ -338,17 +338,99 @@ body {
 .datagrid .operation-bar {
     
 }
-
-.operation-bar .operation {
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-    border: 1px solid transparent;
+.lefttree{
+  border-right:1px dashed rgb(183,183,183);
+  width:210px;
+  height:100%;
+  padding:20px;
+  float:left;
+  overflow: auto;
 }
 
-.operation-bar .operation:hover {
-    color: #ff8000;
-    background-color: #fff;
-    border: 1px solid #ddd;
+.rightcontent{
+    float:left;
+    padding:20px;
+}
+
+.rightcontent .panel-body{
+    padding:10px 5px;
+}
+
+.content-wrapper .panel-body{
+    padding:10px 5px;
+}
+
+.content-wrapper #content-page,.rightcontent #content-page{
+    width:100%;
+    text-align:center;
+}
+
+#content-page li{
+    cursor:pointer;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding:3px 8px;
+}
+
+.operationleft{
+    float:left;
+}
+
+.operationright{
+    float:right;
+}
+
+.operationleft .operation{
+    float:left;
+}
+
+.operationright .operation{
+    float:right;
+}
+
+.operationleft .input-group{
+    max-width:300px;
+}
+
+.operation{
+    margin:0px 10px;
+    padding:0px 10px;
+    float:left;
+}
+
+.operation a{
+    cursor:pointer;
+    color:#4b3ac5;
+    font-size:15px;
+    text-decoration:none;
+    line-height:22px;
+    vertical-align: middle;
+}
+.operation a:visited{color:#4b3ac5;border:0}
+.operation a img{
+    width:20px;
+    height:20px;
+}
+
+.operation a span{
+    line-height:22px;
+    vertical-align: middle;
+}
+
+.operation a:hover{
+    color:#ff8000;
+}
+
+.login{
+    border:1px solid #ddd;
+    margin:8% auto;
+    width:540px;
+    padding:10px 20px;
+    border-radius:5px
 }
