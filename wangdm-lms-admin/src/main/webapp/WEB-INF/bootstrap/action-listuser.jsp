@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="iframe-html">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "action-head.jsp">
@@ -145,15 +145,15 @@
       </div>
       <div class="modal-body">
 	      <form class="form-horizontal" role="form" name="roleform">
-            <c:if test="${not empty roleList}">
-            <c:forEach var="role" items="${roleList}" varStatus="status">
+            <#if roleList??>
+            <#list roleList as role >
 		      <div class="form-group">
 			      <div class="col-sm-offset-2 col-sm-10">
 			      <label><input type="checkbox" name="role" data-id="${role.id}" />${role.title}</label>
 			      </div>
 		      </div>
-            </c:forEach>
-            </c:if>
+            </#list>
+            </#if>
 	      </form>
       </div>
       <div class="modal-footer">
@@ -512,15 +512,15 @@
       </div>
       <div class="modal-body">
           <form class="form-horizontal" role="form" name="roleform">
-            <c:if test="${not empty roleList}">
-            <c:forEach var="role" items="${roleList}" varStatus="status">
+            <#if roleList??>
+            <#list roleList as role >
               <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
                   <label><input type="checkbox" name="role" data-id="${role.id}" />${role.title}</label>
                   </div>
               </div>
-            </c:forEach>
-            </c:if>
+            </#list>
+            </#if>
           </form>
       </div>
       <div class="modal-footer">

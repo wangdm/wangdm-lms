@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="iframe-html">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "action-head.jsp">
 <title></title>
 </head>
 <body>
-<div class="content-wrapper" style="overflow-y:scroll;height:100%">
+<div class="content-wrapper">
 
     <div class="col-md-6 col-lg-6">
         <div class="panel panel-default">
