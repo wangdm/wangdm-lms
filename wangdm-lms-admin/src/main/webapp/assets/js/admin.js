@@ -76,8 +76,8 @@ function showFullMenu(show){
 
 function addTab(id,title,url){
 	var menu = "menu"+id+"tab";
-	var tabStr = "<li role=\"presentation\" data-url=\""+url+"\"><a href=\"#"+menu+"\" aria-controls=\""+menu+"\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>";
-	var contentStr = "<div role=\"tabpanel\" class=\"tab-pane\" id=\""+menu+"\"><iframe src=\""+url+"\" frameborder=\"0\"></iframe></div>";
+	var tabStr = "<li role=\"presentation\" data-url=\""+url+"\" data-id=\""+id+"\"><a href=\"#"+menu+"\" aria-controls=\""+menu+"\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>";
+	var contentStr = "<div role=\"tabpanel\" class=\"tab-pane\" id=\""+menu+"\"><iframe id=\"iframe"+id+"\" src=\""+url+"\" frameborder=\"0\"></iframe></div>";
 	$("#dashboard-tab ul.nav").append(tabStr);
 	$("#dashboard-content").append(contentStr);
 	$("#dashboard-tab  a[href=\"#"+menu+"\"]").tab("show");
@@ -85,16 +85,11 @@ function addTab(id,title,url){
 
 function refreshTab(){
 	var current = $("#dashboard-tab li.active");
-	var href = $(current).children("a").attr("href").substr(1);
-	var url = $("#dashboard-tab li.active").data("url");
-	$.ajax({
-		"url":url,
-        "type": "get"
-	}).success(function(data){
-		$("#dashboard-content div[id='"+href+"']").html(data);
-	}).fail(function(data){
-		console.log("connect "+this.url+" failed with "+data);
-	});
+	var id = $(current).data("id");
+	var url = $(current).data("url");
+	var frameId = "iframe"+id;
+	$("iframe#"+frameId).attr("src",url);
+	
 }
 
 function closeTab(){
