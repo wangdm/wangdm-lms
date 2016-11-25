@@ -7,11 +7,7 @@
 </head>
 <body>
 
-    <div id="dashboard-top">
-        <nav role="navigation" class="navbar">
-            
-        </nav>
-    </div>
+    <#include "top.jsp">
     
     <div id="dashboard-center">
     

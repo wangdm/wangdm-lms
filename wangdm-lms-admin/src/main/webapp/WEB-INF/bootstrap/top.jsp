@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 
     <div id="dashboard-top">
         <nav role="navigation" class="navbar">

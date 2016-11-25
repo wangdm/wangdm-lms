@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.wangdm.lms.config.dto.ImageServer;
 import com.wangdm.lms.config.dto.ModularConfig;
 import com.wangdm.lms.config.service.ImageServerService;
 import com.wangdm.lms.config.service.ModularConfigService;
@@ -41,8 +42,9 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
         
         ModularConfig modularConfig = modularConfigService.getModularConfig();
         request.setAttribute("modularConfig", modularConfig);
-        String imageServerUrl = imageServerService.getImageServerUrl();
-        request.setAttribute("imageServerUrl", imageServerUrl);
+        
+        ImageServer imageServer = imageServerService.getImageServer();
+        request.setAttribute("imageServer", imageServer);
         
         super.postHandle(request, response, handler, modelAndView);
     }
