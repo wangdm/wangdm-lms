@@ -9,7 +9,6 @@ $(function(){
 		showFullMenu(false);
 	}
 
-	addTab(16,"用户组管理","listgroup");
 	$("ul.menu-list").on("click","li", function(){
 		var title = $(this).html();
 		var url = $(this).data("action");

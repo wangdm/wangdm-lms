@@ -138,28 +138,28 @@
       </div>
       <div class="modal-body">
         <div class="panel-group" role="tablist">
-            <c:if test="${not empty permissionGroupList}">
-            <c:forEach var="permissionGroup" items="${permissionGroupList}" varStatus="status">
+            <#if permissionGroupList??>
+            <#list permissionGroupList as permissionGroup >
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab">
                     <h4 class="panel-title"><a href="#PermissionGroup${permissionGroup.id}" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="PermissionGroup${permissionGroup.id}">${permissionGroup.name}</a></h4>
                 </div>
                 <div class="panel-collpase collapse" role="tabpanel" id="PermissionGroup${permissionGroup.id}" aria-expanded="false">
                     <ul class="list-group" style="margin-bottom:-1px;">
-                        <c:if test="${not empty permissionGroup.permList}">
-                        <c:forEach var="perm" items="${permissionGroup.permList}">
+                        <#if permissionGroup.permList??>
+                        <#list permissionGroup.permList as perm >
                         <li class="list-group-item" style="padding: 4px 20px;">
                             <label style="margin-bottom: 0px;">
                                 <input data-id="${perm.id}" type="checkbox" style="margin:0px;vertical-align:middle;"/> ${perm.title}
                             </label>
                         </li>
-                        </c:forEach>
-                        </c:if>
+                        </#list>
+                        </#if>
                     </ul>
                 </div>
             </div>
-            </c:forEach>
-            </c:if>
+            </#list>
+            </#if>
         </div>  
       </div>
       <div class="modal-footer">
