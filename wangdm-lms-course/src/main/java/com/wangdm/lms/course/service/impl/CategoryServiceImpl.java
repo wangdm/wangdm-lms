@@ -161,7 +161,7 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 	@Override
 	public CategoryDto getCategoryTree(Serializable id) {
 
-	    Category root = categoryDao.findById(id);
+	    Category root = categoryDao.findById(Category.class, id);
 	    if(root==null){
 	        return null;
 	    }

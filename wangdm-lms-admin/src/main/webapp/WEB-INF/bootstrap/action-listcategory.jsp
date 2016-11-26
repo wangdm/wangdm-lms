@@ -9,7 +9,7 @@
 <body>
 
 <div class="lefttree">
-    <c:import url="categorytree.jsp"></c:import>
+    <#include "categorytree.jsp">
 </div>
 
   <div class="rightcontent"  >
@@ -268,13 +268,14 @@
 <script>
 var parentId = 1;
 $(function(){
-    getDirectChildrenCategory(parentId);
+    getCategoryChildren(parentId);
     $(".lefttree").on("click",".node",function(){
         parentId=$(this).attr("data-id");
         var parentname=$(this).text();
         $("#addCategoryForm").find("[name='parentname']").val(parentname);
+        $("#addCategoryForm").find("[name='parentname']").data("parentId", parentId);
         $("#addAttributeForm").find("[name='catname']").val(parentname);
-        getDirectChildrenCategory(parentId);
+        getCategoryChildren(parentId);
         getAttributeByCategory(parentId);
     });
     
@@ -443,7 +444,7 @@ $(function(){
             $("#addCategoryDialog").modal("hide");
             $("#addCategoryForm").find("[name='catname']").val("");
             createCategoryTree($(".categorytree"));
-            getDirectChildrenCategory(parentId);
+            getCategoryChildren(parentId);
         }).fail(function(){
             console.log("connect "+this.url+" failed!");
             return null;
@@ -463,7 +464,7 @@ $(function(){
         }).success(function(data){
             $("#editCategoryDialog").modal("hide");
             createCategoryTree($(".categorytree"));
-            getDirectChildrenCategory(parentId);
+            getCategoryChildren(parentId);
         }).fail(function(){
             console.log("connect "+this.url+" failed!");
             return null;
@@ -481,7 +482,7 @@ $(function(){
         }).success(function(data){
             $("#delCategoryDialog").modal("hide");
             createCategoryTree($(".categorytree"));
-            getDirectChildrenCategory(parentId);
+            getCategoryChildren(parentId);
         }).fail(function(){
             console.log("connect "+this.url+" failed!");
             return null;

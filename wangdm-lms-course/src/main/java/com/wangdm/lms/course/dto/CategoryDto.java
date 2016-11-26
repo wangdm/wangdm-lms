@@ -3,16 +3,19 @@ package com.wangdm.lms.course.dto;
 import java.util.List;
 
 import com.wangdm.core.dto.BaseDto;
-import com.wangdm.core.entity.Entity;
+import com.wangdm.core.dto.annotation.DtoMapper;
 import com.wangdm.lms.course.entity.Category;
 
 public class CategoryDto extends BaseDto {
     
-    private String catId = "0";
-    
-    private String catName;
-    
-    private String catIdx = "1";
+    @DtoMapper(entity = Category.class, field = "id")
+    private String id = "0";
+
+    @DtoMapper(entity = Category.class, field = "name")
+    private String name;
+
+    @DtoMapper(entity = Category.class, field = "index")
+    private String idx = "1";
     
     private List<CategoryDto> children;
     
@@ -20,31 +23,31 @@ public class CategoryDto extends BaseDto {
 
     @Override
     public Long getEntityId() {
-        return Long.valueOf(catId);
+        return Long.valueOf(id);
     }
 
-    public String getCatId() {
-        return catId;
+    public String getId() {
+        return id;
     }
 
-    public void setCatId(String catId) {
-        this.catId = catId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCatName() {
-        return catName;
+    public String getName() {
+        return name;
     }
 
-    public void setCatName(String catNane) {
-        this.catName = catNane;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCatIdx() {
-        return catIdx;
+    public String getIdx() {
+        return idx;
     }
 
-    public void setCatIdx(String catIdx) {
-        this.catIdx = catIdx;
+    public void setIdx(String idx) {
+        this.idx = idx;
     }
 
     public List<CategoryDto> getChildren() {
@@ -61,23 +64,6 @@ public class CategoryDto extends BaseDto {
 
     public List<AttributeNameDto> getAttributes() {
         return attributes;
-    }
-
-    @Override
-    public Entity toEntity(Class<?> clazz) {
-        Category category = new Category();
-        category.setName(this.getCatName());
-        category.setIndex(Integer.valueOf(this.getCatIdx()));
-        return category;
-    }
-
-    @Override
-    public void fromEntity(Entity entity) {
-        Category category = (Category)entity;
-        this.catId = category.getId().toString();
-        this.catName = category.getName();
-        this.catIdx = category.getIndex().toString();
-        super.fromEntity(entity);
     }
 
 }

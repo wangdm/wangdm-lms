@@ -29,52 +29,6 @@ function showMessageBox(message, timeout, level)
     }, timeout);
 }
 
-function traverseTree(tree, path, id)
-{
-    for (var i = 0; i < tree.length; i++)
-    {
-        if (tree[i].id == id)
-        {
-            path.push(tree[i]);
-            break;
-        } else if (tree[i].children)
-        {
-            path.push(tree[i]);
-            traverseTree(tree[i].children, path, id);
-            if (path[path.length - 1].id == id)
-            {
-                break;
-            } else
-            {
-                path.pop();
-            }
-        }
-    }
-}
-
-function traverseGroupTree(tree, path, gid)
-{
-    for (var i = 0; i < tree.length; i++)
-    {
-        if (tree[i].gid == gid)
-        {
-            path.push(tree[i]);
-            break;
-        } else if (tree[i].children)
-        {
-            path.push(tree[i]);
-            traverseGroupTree(tree[i].children, path, gid);
-            if (path[path.length - 1].gid == gid)
-            {
-                break;
-            } else
-            {
-                path.pop();
-            }
-        }
-    }
-}
-
 function createPagination(currentPage, totalPage)
 {
     if (totalPage < 1)
@@ -115,195 +69,6 @@ function createPagination(currentPage, totalPage)
     $("#content-page .pagination").html(pageStr);
 }
 
-function addCategory(name)
-{
-    var cat = {
-        "name" : name
-    };
-    $.ajax({
-        "url" : sdkPath + "/categorys",
-        "type" : "POST",
-        "data" : JSON.stringify(cat),
-        "dataType" : "json",
-        "contentType" : "application/json",
-    }).success(function(data)
-    {
-        console.log(data);
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-    });
-}
-
-function editCategory(id, name)
-{
-    var cat = {
-        "name" : name,
-        "id" : id
-    };
-    $.ajax({
-        "url" : sdkPath + "/categorys/" + id,
-        "type" : "PUT",
-        "data" : JSON.stringify(cat),
-        "dataType" : "json",
-        "contentType" : "application/json",
-    }).success(function(data)
-    {
-        console.log(data);
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-    });
-}
-
-function delCategory(id)
-{
-    $.ajax({
-        "url" : sdkPath + "/categorys/" + id,
-        "type" : "DELETE",
-        "contentType" : "application/json",
-    }).success(function(data)
-    {
-        console.log(data);
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-    });
-}
-
-function getAllChildrenCategory(id)
-{
-    $.ajax({
-        "url" : sdkPath + "/allchildrencategorys/" + id,
-        "type" : "GET",
-    }).success(function(data)
-    {
-    // console.log(data);
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-        return null;
-    });
-}
-
-function createCategoryTable(data)
-{
-    if (!data)
-    {
-        return;
-    }
-    var tablestr = "<tr data-id=\""
-            + data.id
-            + "\" class=\"info\">"
-            + "  <td>"
-            + data.name
-            + "</td>"
-            + "  <td></td>"
-            + "  <td></td>"
-            + "  <td><button type=\"button\" class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#editCategoryDialog\">编辑</button></td>"
-            + "  <td><button type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#delCategoryDialog\">删除</button></td>"
-            + "</tr>";
-    if (data.children)
-    {
-        for (var i = 0; i < data.children.length; i++)
-        {
-            tablestr += "<tr data-id=\""
-                    + data.children[i].id
-                    + "\">"
-                    + "  <td>"
-                    + data.children[i].name
-                    + "</td>"
-                    + "  <td></td>"
-                    + "  <td></td>"
-                    + "  <td><button type=\"button\" class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#editCategoryDialog\">编辑</button></td>"
-                    + "  <td><button type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#delCategoryDialog\">删除</button></td>"
-                    + "</tr>";
-        }
-    }
-    $("#categoryTable tbody").html(tablestr);
-}
-
-function getDirectChildrenCategory(id)
-{
-    $.ajax({
-        "url" : sdkPath + "/directchildrencategorys/" + id,
-        "type" : "GET",
-    }).success(function(data)
-    {
-        createCategoryTable(data);
-        var input = $('#addCategoryDialog').find("[name='parentname']");
-        input.val(data.name);
-        $(input).attr("data-parentId", data.id);
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-        return null;
-    });
-}
-
-// /////////////////////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////////////////
-
-function recursiveTree(tree, pid, data)
-{
-    tree.add(data.id, pid, data.name);
-    if (data.children && data.children.length > 0)
-    {
-        for (var i = 0; i < data.children.length; i++)
-        {
-            recursiveTree(tree, data.id, data.children[i]);
-        }
-    }
-}
-
-function createCategoryTree(node)
-{
-
-    $.ajax({
-        "url" : sdkPath + "/allchildrencategorys/" + 0,
-        "type" : "GET",
-    }).success(function(data)
-    {
-        categoryTree = data;
-        d = new dTree('d');
-        recursiveTree(d, -1, data);
-        node.html(d.toString());
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-        return null;
-    });
-}
-
-function recursiveGroupTree(tree, pid, data)
-{
-    tree.add(data.id, pid, data.name);
-    if (data.children && data.children.length > 0)
-    {
-        for (var i = 0; i < data.children.length; i++)
-        {
-            recursiveGroupTree(tree, data.id, data.children[i]);
-        }
-    }
-}
-
-function createGroupTree(node)
-{
-
-    $.ajax({
-        "url" : sdkPath + "/allchildrengroups/" + 0,
-        "type" : "GET",
-    }).success(function(data)
-    {
-        d = new dTree('d');
-        recursiveGroupTree(d, -1, data);
-        node.html(d.toString());
-    }).fail(function()
-    {
-        console.log("connect " + this.url + " failed!");
-        return null;
-    });
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// 导航菜单
@@ -813,6 +578,37 @@ function getDirectChildrenGroup(id)
         return null;
     });
 }
+
+function recursiveGroupTree(tree, pid, data)
+{
+    tree.add(data.id, pid, data.name);
+    if (data.children && data.children.length > 0)
+    {
+        for (var i = 0; i < data.children.length; i++)
+        {
+            recursiveGroupTree(tree, data.id, data.children[i]);
+        }
+    }
+}
+
+function createGroupTree(node)
+{
+
+    $.ajax({
+        "url" : sdkPath + "/allchildrengroups/" + 0,
+        "type" : "GET",
+    }).success(function(data)
+    {
+        d = new dTree('d');
+        recursiveGroupTree(d, -1, data);
+        node.html(d.toString());
+    }).fail(function()
+    {
+        console.log("connect " + this.url + " failed!");
+        return null;
+    });
+}
+
 
 // /////////////////////////////////////////////////////////////////////////////
 // / Role
@@ -1568,10 +1364,294 @@ function createUserTable(data)
     $(".table tbody").html(tablestr);
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+/// 课程分类
+///////////////////////////////////////////////////////////////////////////////
+
+function addCategory(name)
+{
+  var cat = {
+      "name" : name
+  };
+  $.ajax({
+      "url" : sdkPath + "/categorys",
+      "type" : "POST",
+      "data" : JSON.stringify(cat),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function editCategory(id, name)
+{
+  var cat = {
+      "name" : name,
+      "id" : id
+  };
+  $.ajax({
+      "url" : sdkPath + "/categorys/" + id,
+      "type" : "PUT",
+      "data" : JSON.stringify(cat),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function delCategory(id)
+{
+  $.ajax({
+      "url" : sdkPath + "/categorys/" + id,
+      "type" : "DELETE",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function createCategoryTable(data)
+{
+  if (!data)
+  {
+      return;
+  }
+  var tablestr = "";
+  for (var i = 0; i < data.length; i++)
+  {
+      tablestr += "<tr data-id=\""
+              + data[i].id
+              + "\">"
+              + "  <td>"
+              + data[i].name
+              + "</td>"
+              + "  <td></td>"
+              + "  <td></td>"
+              + "  <td><button type=\"button\" class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#editCategoryDialog\">编辑</button></td>"
+              + "  <td><button type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#delCategoryDialog\">删除</button></td>"
+              + "</tr>";
+  }
+  $("#categoryTable tbody").html(tablestr);
+}
+
+function getCategoryChildren(id)
+{
+  $.ajax({
+      "url" : sdkPath + "/category/" + id + "/children",
+      "type" : "GET",
+  }).success(function(data)
+  {
+      createCategoryTable(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+      return null;
+  });
+}
+
+function recursiveCategoryTree(tree, pid, data)
+{
+  tree.add(data.id, pid, data.name);
+  if (data.children && data.children.length > 0)
+  {
+      for (var i = 0; i < data.children.length; i++)
+      {
+          recursiveCategoryTree(tree, data.id, data.children[i]);
+      }
+  }
+}
+
+function createCategoryTree(node)
+{
+
+  $.ajax({
+      "url" : sdkPath + "/category/1/tree",
+      "type" : "GET",
+  }).success(function(data)
+  {
+      categoryTree = data;
+      d = new dTree('d');
+      recursiveCategoryTree(d, -1, data);
+      console.log(categoryTree);
+      node.html(d.toString());
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+      return null;
+  });
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// 课程属性
+///////////////////////////////////////////////////////////////////////////////
+
+function addAttribute(attribute)
+{
+  $.ajax({
+      "url" : sdkPath + "/attribute",
+      "type" : "POST",
+      "data" : JSON.stringify(attribute),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function editAttribute(attribute)
+{
+  $.ajax({
+      "url" : sdkPath + "/attribute/" + attribute.id,
+      "type" : "PUT",
+      "data" : JSON.stringify(attribute),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function delAttribute(id)
+{
+  $.ajax({
+      "url" : sdkPath + "/attribute/" + id,
+      "type" : "DELETE",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function addAttributeValue(id,strArray)
+{
+  $.ajax({
+      "url" : sdkPath + "/attribute/" + id + "/value",
+      "type" : "POST",
+      "data" : JSON.stringify(strArray),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function editAttributeValue(attribute)
+{
+  $.ajax({
+      "url" : sdkPath + "/attribute/" + attribute.id + "/value",
+      "type" : "PUT",
+      "data" : JSON.stringify(attribute.values),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function delAttributeValue(id, idArray)
+{
+  $.ajax({
+      "url" : sdkPath + "/attribute/" + id + "/value",
+      "type" : "DELETE",
+      "data" : JSON.stringify(idArray),
+      "dataType" : "json",
+      "contentType" : "application/json",
+  }).success(function(data)
+  {
+      console.log(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+  });
+}
+
+function createAttributeTable(data)
+{
+  if (!data)
+  {
+      return;
+  }
+  var tablestr = "";
+  for (var i = 0; i < data.length; i++)
+  {
+      tablestr += "<tr data-id=\""
+              + data[i].id
+              + "\">"
+              + "  <td>"
+              + data[i].name
+              + "  </td>"
+              + "  <td>";
+      var values = data[i].values;
+      for(var j = 0; j< values.leagth; j++)
+      {
+          tablestr += "<label><input type=\"checkbox\">"+values[j].value+"</label>";
+      }
+      tablestr += "  </td>"
+              + "  <td><div class=\"btn-group\" role=\"group\">"
+              + "    <button type=\"button\" class=\"btn btn-default\">Left</button>"
+              + "    <button type=\"button\" class=\"btn btn-default\">Middle</button>"
+              + "    <button type=\"button\" class=\"btn btn-default\">Right</button>"
+              + "  </div></td>"
+              + "</tr>";
+  }
+  $("#categoryTable tbody").html(tablestr);
+}
+
+function getCategoryAttribute(id)
+{
+  $.ajax({
+      "url" : sdkPath + "/category/" + id + "/attributes",
+      "type" : "GET",
+  }).success(function(data)
+  {
+      createAttributeTable(data);
+  }).fail(function()
+  {
+      console.log("connect " + this.url + " failed!");
+      return null;
+  });
+}
+
+
 // /////////////////////////////////////////////////////////////////////////////
 // / 课程
 // /////////////////////////////////////////////////////////////////////////////
-//TODO
 function addCourse(course)
 {
     $.ajax({
