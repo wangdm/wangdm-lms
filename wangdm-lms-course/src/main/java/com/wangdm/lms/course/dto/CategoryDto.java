@@ -9,13 +9,16 @@ import com.wangdm.lms.course.entity.Category;
 public class CategoryDto extends BaseDto {
     
     @DtoMapper(entity = Category.class, field = "id")
-    private String id = "0";
+    private String id;
 
     @DtoMapper(entity = Category.class, field = "name")
     private String name;
 
     @DtoMapper(entity = Category.class, field = "index")
-    private String idx = "1";
+    private String idx;
+    
+    @DtoMapper(entity = Category.class, field = "parent.id")
+    private String parentId;
     
     private List<CategoryDto> children;
     
@@ -48,6 +51,14 @@ public class CategoryDto extends BaseDto {
 
     public void setIdx(String idx) {
         this.idx = idx;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public List<CategoryDto> getChildren() {

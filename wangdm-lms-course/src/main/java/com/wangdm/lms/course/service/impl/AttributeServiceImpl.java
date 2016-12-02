@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,15 +27,18 @@ import com.wangdm.lms.course.service.AttributeService;
 
 @Service("attributeServie")
 @Transactional
-public class AttributeServiceImpl extends BaseService<AttributeName> implements AttributeService {
+public class AttributeServiceImpl extends BaseService<AttributeName> implements AttributeService,InitializingBean {
 
     @Autowired
+    @Qualifier("attributeNameDao")
     Dao<AttributeName> attributeNameDao;
     
     @Autowired
+    @Qualifier("attributeValueDao")
     Dao<AttributeValue> attributeValueDao;
     
     @Autowired
+    @Qualifier("attributeMapDao")
     Dao<AttributeMap> attributeMapDao;
     
     @Autowired
@@ -150,7 +155,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
 
     
     @Override
-    public void delAttributeValue(List<Serializable> valueIds) {
+    public void delAttributeValue(List<Long> valueIds) {
         
         if(valueIds!=null && valueIds.size()>0){
             for(int i=0; i<valueIds.size(); i++){
@@ -179,6 +184,32 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         
     }
 
+
+    @Override
+    public List<AttributeValueDto> getAttributeValue(Serializable attributeId) {
+
+        Constraint constraint = constraintFactory.createConstraint(AttributeValue.class);
+        
+        constraint.addEqualCondition("name.id", attributeId);
+        
+        constraint.addEqualCondition("status", EntityStatus.NORMAL);
+        
+        List<AttributeValue> entityList = attributeValueDao.findByConstraint(constraint);
+        if(entityList == null || entityList.size()<=0){
+            return null;
+        }
+        
+        List<AttributeValueDto> dtoList = new ArrayList<AttributeValueDto>(entityList.size());
+        for(AttributeValue entity : entityList){
+            AttributeValueDto dto = new AttributeValueDto();
+            dto.fromEntity(entity);
+            
+            dtoList.add(dto);
+        }
+        
+        return dtoList;
+    }
+
     
     @Override
     public List<AttributeMapDto> getEntityAttribute(Serializable entityId, EntityType entityType) {
@@ -205,6 +236,14 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         }
         
         return dtoList;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        attributeNameDao.setClazz(AttributeName.class);
+        attributeValueDao.setClazz(AttributeValue.class);
+        attributeMapDao.setClazz(AttributeMap.class);
+        
     }
 
 }

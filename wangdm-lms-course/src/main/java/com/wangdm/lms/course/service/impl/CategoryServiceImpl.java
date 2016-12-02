@@ -20,6 +20,7 @@ import com.wangdm.lms.course.dto.CategoryDto;
 import com.wangdm.lms.course.entity.AttributeName;
 import com.wangdm.lms.course.entity.AttributeValue;
 import com.wangdm.lms.course.entity.Category;
+import com.wangdm.lms.course.service.AttributeService;
 import com.wangdm.lms.course.service.CategoryService;
 
 @Service("categoryServie")
@@ -31,6 +32,9 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
     
     @Autowired
     Dao<AttributeName> attributeNameDao;
+    
+    @Autowired
+    AttributeService attributeServie;
     
     @Autowired
     private ConstraintFactory constraintFactory;
@@ -115,9 +119,9 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         for(AttributeName nameEntity : nameList){
             AttributeNameDto nameDto = new AttributeNameDto();
             nameDto.fromEntity(nameEntity);
-            
-            if(nameEntity.getValueList()!=null){
-                List<AttributeValue> valueList = nameEntity.getValueList();
+
+            List<AttributeValue> valueList = nameEntity.getValueList();
+            if(valueList!=null && valueList.size()>0){
                 List<AttributeValueDto> valueDtoList = new ArrayList<AttributeValueDto>(valueList.size());
                 for(AttributeValue valueEntity : valueList){
                     AttributeValueDto valueDto = new AttributeValueDto();
@@ -125,6 +129,8 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
                     valueDtoList.add(valueDto);
                 }
                 nameDto.setValues(valueDtoList);
+            }else{
+                nameDto.setValues(attributeServie.getAttributeValue(nameEntity.getId()));
             }
             
             dtoList.add(nameDto);

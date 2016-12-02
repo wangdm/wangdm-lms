@@ -1,6 +1,5 @@
 package com.wangdm.lms.sdk.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class CategoryRestController extends BaseRestController {
     @Autowired
     AttributeService attributeService;
     
-    @RequestMapping(value="/category/{id}/tree",method=RequestMethod.GET)
+    @RequestMapping(value="/categorys/{id}/tree",method=RequestMethod.GET)
     @ResponseBody
     public CategoryDto getTree(@PathVariable("id") Long id){
         
@@ -40,7 +39,7 @@ public class CategoryRestController extends BaseRestController {
         return dto;
     }    
     
-    @RequestMapping(value="/category/{id}/children",method=RequestMethod.GET)
+    @RequestMapping(value="/categorys/{id}/children",method=RequestMethod.GET)
     @ResponseBody
     public List<CategoryDto> getChildren(@PathVariable("id") Long id){
         
@@ -52,7 +51,7 @@ public class CategoryRestController extends BaseRestController {
         return dtoList;
     }      
     
-    @RequestMapping(value="/category/{id}/ancestors",method=RequestMethod.GET)
+    @RequestMapping(value="/categorys/{id}/ancestors",method=RequestMethod.GET)
     @ResponseBody
     public List<CategoryDto> getAncestors(@PathVariable("id") Long id){
         
@@ -64,7 +63,7 @@ public class CategoryRestController extends BaseRestController {
         return dtoList;
     }       
     
-    @RequestMapping(value="/category/{id}/attributes",method=RequestMethod.GET)
+    @RequestMapping(value="/categorys/{id}/attributes",method=RequestMethod.GET)
     @ResponseBody
     public List<AttributeNameDto> getAttributes(@PathVariable("id") Long id){
         
@@ -76,7 +75,7 @@ public class CategoryRestController extends BaseRestController {
         return dtoList;
     }        
     
-    @RequestMapping(value="/category",method=RequestMethod.POST)
+    @RequestMapping(value="/categorys",method=RequestMethod.POST)
     @ResponseBody
     public StatusDto createCategory(@RequestBody CategoryDto dto){
         
@@ -85,7 +84,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }    
     
-    @RequestMapping(value="/category/{id}",method=RequestMethod.PUT)
+    @RequestMapping(value="/categorys/{id}",method=RequestMethod.PUT)
     @ResponseBody
     public StatusDto editCategory(@RequestBody CategoryDto dto){
         
@@ -94,7 +93,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }    
     
-    @RequestMapping(value="/category/{id}",method=RequestMethod.DELETE)
+    @RequestMapping(value="/categorys/{id}",method=RequestMethod.DELETE)
     @ResponseBody
     public StatusDto deleteCategory(@PathVariable("id") Long id){
         
@@ -103,7 +102,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }        
     
-    @RequestMapping(value="/attribute",method=RequestMethod.POST)
+    @RequestMapping(value="/attributes",method=RequestMethod.POST)
     @ResponseBody
     public StatusDto createAttribute(@RequestBody AttributeNameDto dto){
         
@@ -112,7 +111,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }    
     
-    @RequestMapping(value="/attribute/{id}",method=RequestMethod.PUT)
+    @RequestMapping(value="/attributes/{id}",method=RequestMethod.PUT)
     @ResponseBody
     public StatusDto editAttribute(@RequestBody AttributeNameDto dto){
         
@@ -121,7 +120,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }    
     
-    @RequestMapping(value="/attribute/{id}",method=RequestMethod.DELETE)
+    @RequestMapping(value="/attributes/{id}",method=RequestMethod.DELETE)
     @ResponseBody
     public StatusDto deleteAttribute(@PathVariable("id") Long id){
         
@@ -130,7 +129,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }         
     
-    @RequestMapping(value="/attribute/{id}/value",method=RequestMethod.POST)
+    @RequestMapping(value="/attributes/{id}/value",method=RequestMethod.POST)
     @ResponseBody
     public StatusDto createAttributeValue(@PathVariable("id") Long id, @RequestBody List<String> strList){
         
@@ -139,7 +138,7 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }    
     
-    @RequestMapping(value="/attribute/{id}/value",method=RequestMethod.PUT)
+    @RequestMapping(value="/attributes/{id}/value",method=RequestMethod.PUT)
     @ResponseBody
     public StatusDto editAttributeValue(@PathVariable("id") Long id, @RequestBody List<AttributeValueDto> dtoList){
         
@@ -148,9 +147,9 @@ public class CategoryRestController extends BaseRestController {
         return new StatusDto(200, "success", "");
     }    
     
-    @RequestMapping(value="/attribute/{id}/value",method=RequestMethod.DELETE)
+    @RequestMapping(value="/attributes/{id}/value",method=RequestMethod.DELETE)
     @ResponseBody
-    public StatusDto deleteAttributeValue(@PathVariable("id") Long id, @PathVariable("id") List<Serializable> idList){
+    public StatusDto deleteAttributeValue(@PathVariable("id") Long id, @RequestBody List<Long> idList){
         
         attributeService.delAttributeValue(idList);
 

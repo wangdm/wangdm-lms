@@ -64,37 +64,83 @@
         </div> <!-- 属性列表  end-->
     </div>
 
-      <!-- 添加分类对话框 start-->
-        <div class="modal fade" id="addCategoryDialog" tabindex="-1" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加分类</h4>
-              </div>
-              <div class="modal-body">
-                  <form  class="form-horizontal" id="addCategoryForm" name="addCategoryForm">
-                      <div class="form-group">
-                        <label for="parentname" class="col-sm-3 control-label">父类目：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="parentname" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="catname" class="col-sm-3 control-label">分类名：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="catname">
-                        </div>
-                      </div>
-                 </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-sm" id="addCategoryBtn">确定</button>
-              </div>
-            </div>
+    <!-- 添加分类对话框 start-->
+    <div class="modal fade" id="addCategoryDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">添加分类</h4>
           </div>
-        </div> <!-- 添加分类对话框 end-->
+          <div class="modal-body">
+              <form  class="form-horizontal" id="addCategoryForm" name="addCategoryForm">
+                  <div class="form-group">
+                    <label for="parentname" class="col-sm-3 control-label">父类目：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="parentname" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="catname" class="col-sm-3 control-label">分类名：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="catname">
+                    </div>
+                  </div>
+             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary btn-sm" id="addCategoryBtn">确定</button>
+          </div>
+        </div>
+      </div>
+    </div> <!-- 添加分类对话框 end-->
+    
+
+    <!-- 修改分类对话框 start-->
+    <div class="modal fade" id="editCategoryDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">重命名分类</h4>
+          </div>
+          <div class="modal-body">
+              <form  class="form-horizontal" id="editCategoryForm" name="editCategoryForm">
+                  <div class="form-group">
+                    <label for="catname" class="col-sm-3 control-label">分类名：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="catname">
+                    </div>
+                  </div>
+             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary btn-sm" id="editCategoryBtn">重命名</button>
+          </div>
+        </div>
+      </div>
+    </div>  <!-- 修改分类对话框end -->
+  
+    
+    <!-- 删除类别对话框  start-->
+    <div class="modal fade" id="delCategoryDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">删除分类</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary btn-sm" id="delCategoryBtn">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>  <!-- 删除类别对话框  end-->
     
 
     <!-- 添加属性对话框  start-->
@@ -135,32 +181,6 @@
       </div>
     </div> <!-- 添加属性对话框  end-->
     
-
-  <!-- 修改分类对话框 start-->
-    <div class="modal fade" id="editCategoryDialog" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">重命名分类</h4>
-          </div>
-          <div class="modal-body">
-              <form  class="form-horizontal" id="editCategoryForm" name="editCategoryForm">
-                  <div class="form-group">
-                    <label for="catname" class="col-sm-3 control-label">分类名：</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" name="catname">
-                    </div>
-                  </div>
-             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary btn-sm" id="editCategoryBtn">重命名</button>
-          </div>
-        </div>
-      </div>
-    </div>  <!-- 修改分类对话框end -->
     
     <!-- 修改属性名对话框 start-->
     <div class="modal fade" id="editAttributenameDialog" tabindex="-1" role="dialog">
@@ -187,6 +207,24 @@
         </div>
       </div>
     </div>  <!-- 修改属性名对话框end -->
+  
+    <!-- 删除属性名对话框  start-->
+    <div class="modal fade" id="delAttributenameDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">删除属性名</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary btn-sm" id="delAttributenameBtn">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>  <!-- 删除属性名对话框  end-->
     
     
       <!-- 修改属性值对话框 start-->
@@ -210,137 +248,77 @@
         </div>
       </div>
     </div>  <!-- 修改属性值对话框end -->
-  
     
-     <!-- 删除类别对话框  start-->
-        <div class="modal fade" id="delCategoryDialog" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">删除分类</h4>
-              </div>
-              <div class="modal-body">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-sm" id="delCategoryBtn">删除</button>
-              </div>
-            </div>
+
+    <!-- 添加属性值对话框  start-->
+    <div class="modal fade" id="addAttributevalueDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">添加属性值</h4>
           </div>
-        </div>  <!-- 删除类别对话框  end-->
-  
-          <!-- 删除类别对话框  start-->
-        <div class="modal fade" id="delAttributenameDialog" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">删除属性名</h4>
-              </div>
-              <div class="modal-body">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-sm" id="delAttributenameBtn">删除</button>
-              </div>
-            </div>
+          <div class="modal-body">
+              <form  class="form-horizontal"  id="addAttributevalueForm"  name="addAttributevalueForm">
+                  <div class="form-group">
+                    <label for="catname" class="col-sm-3 control-label">属性名：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="attributename" readonly>
+                    </div>
+                  </div>
+                   <div class="form-group">
+                    <label for="catname" class="col-sm-3 control-label">属性值：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="attributevalue">
+                    </div>
+                  </div>
+             </form>
           </div>
-        </div>  <!-- 删除类别对话框  end-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary btn-sm" id="addAttributevalueBtn">确定</button>
+          </div>
+        </div>
+      </div>
+    </div> <!-- 添加属性值对话框  end-->
+    
         
-            <!-- 删除类别对话框  start-->
-        <div class="modal fade" id="delAttributevalueDialog" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">删除属性值</h4>
-              </div>
-              <div class="modal-body">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-sm" id="delAttributevalueBtn">删除</button>
-              </div>
-            </div>
+    <!-- 删除属性值对话框  start-->
+    <div class="modal fade" id="delAttributevalueDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">删除属性值</h4>
           </div>
-        </div>  <!-- 删除类别对话框  end-->
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary btn-sm" id="delAttributevalueBtn">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>  <!-- 删除属性值对话框  end-->
+        
 <script>
+var currentCategory = {id:"1"};
 var parentId = 1;
 $(function(){
-    getCategoryChildren(parentId);
+    getCategoryChildren(currentCategory.id);
     $(".lefttree").on("click",".node",function(){
         parentId=$(this).attr("data-id");
         var parentname=$(this).text();
-        $("#addCategoryForm").find("[name='parentname']").val(parentname);
-        $("#addCategoryForm").find("[name='parentname']").data("parentId", parentId);
-        $("#addAttributeForm").find("[name='catname']").val(parentname);
-        getCategoryChildren(parentId);
-        getAttributeByCategory(parentId);
+        currentCategory.id = $(this).data("id");
+        currentCategory.name = $(this).text();
+        $("#addCategoryForm").find("[name='parentname']").val(currentCategory.name);
+        $("#addCategoryForm").find("[name='parentname']").data("parentId", currentCategory.id);
+        $("#addAttributeForm").find("[name='catname']").val(currentCategory.name);
+        $("#addAttributeForm").find("[name='catname']").data("parentId", currentCategory.id);
+        getCategoryChildren(currentCategory.id);
+        getCategoryAttribute(currentCategory.id);
     });
     
-    //编辑属性值时动态添加输入框
-    var attributeHtml="<div class=\"form-group\">"
-    +"<label for=\"catname\" class=\"col-sm-3 control-label\">属性值：</label>"
-    +"<div class=\"col-sm-7\">"
-    +" <input type=\"text\" class=\"form-control\" name=\"attributevalue\"  id=\"uuid\">"
-    +" </div><span class=\"delAttri\" id=\"uuid\" style=\"line-height:32px;color:red;cursor:pointer\">删除</span>"
-    +"</div>"
-    
-    $("#addAttribute").on("click",function(){
-        $(attributeHtml).appendTo($("#editAttributevalueForm"));
-    });
-    
-    //动态绑定单击事件(click)
-     $("form").on("click","span",function(){
-         var attrId=$(this).attr("id");
-         if(attrId!="uuid"){
-             deleteAttrivalue(attrId);	 
-         }
-         $(this).parent().remove();
-    });
-    
-    
-    function getAttributeByCategory(id){
-        $.ajax({
-               "url": sdkPath+"/category/findAttrById",
-               "type": "post",
-               "data":{
-                  "categoryId":id,
-               },
-               datatype:"json",
-          }).success(function(data){
-                  var categorys=data.categorys;
-                  var items=data.itemlist;
-                  var tablestr='';
-                  for(var i=0;i<categorys.length;i++){
-                      tablestr += "<tr data-id=\""
-                            + categorys[i].attriId
-                            + "\">"
-                            + "  <td>"
-                            + categorys[i].attriName
-                            + "</td>"
-                            + "  <td id=\""+categorys[i].attriId+"\"></td>"
-                            + " <td><button style=\"margin-left:1%;padding:4px  6px;\"    type=\"button\" class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#editAttributenameDialog\">编辑属性</button>"
-                            + " <button style=\"margin-left:1%;padding:4px  6px;\"    type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#delAttributenameDialog\">删除属性</button>"
-                            + " <button style=\"margin-left:1%;padding:4px  4px;\"    type=\"button\" class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#editAttributevalueDialog\">编辑属性值</button>"
-                            + " <button style=\"margin-left:1%;padding:4px  4px;\"    type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#delAttributevalueDialog\">删除属性值</button></td>"
-                            + "</tr>";
-                }
-                  $("#attributeTable").find("tbody").html("");
-                  $("#attributeTable").find("tbody").html(tablestr);  
-                  for(var i=0;i<categorys.length;i++){
-                      for(var j=0;j<items.length;j++){
-                         if(items[j].attributenameId==categorys[i].attriId){
-                            var id= $("#"+categorys[i].attriId+"").attr("id");
-                             $("#attributeTable td#"+categorys[i].attriId+"").append("<input  name=\"attributevalue\"  type=\"checkbox\"  id=\""+items[j].id+"\"  value=\""+items[j].id+"\"><span style=\"margin-right:10px;line-height:20px;\">"+items[j].value+"</span>");
-                         }
-                     }
-                 } 
-        }).fail(function() {
-            console.log("connect " + this.url + " failed!");
-        });
-    }
     
    /////////////////////////////////////////////////////////////
    /////////////////////////////////////////////////////////////
@@ -349,40 +327,68 @@ $(function(){
     $('#editCategoryDialog').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         var tr = $(button).parentsUntil("tbody").filter("tr");
-        var id = tr.data('id');
-        var name = $(tr).children("td:first").text();
-        $(this).find("[name='catname']").val(name);
-        $(this).find('#editCategoryBtn').attr("data-id",id);
+        var index = tr.data('index');
+        var category = currentCategory.children[index];
+        $(this).find("[name='catname']").val(category.name);
+        $(this).find('#editCategoryBtn').data("id",category.id);
     })
     
     //删除分类模态框
     $('#delCategoryDialog').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var tr = $(button).parentsUntil("tbody").filter("tr");
-          var id = tr.data('id');
-          var name = $(tr).children("td:first").text();
-          $(this).find('.modal-body').text("是否删除  \""+name+"\" 分类?");
-          $(this).find('#delCategoryBtn').attr("data-id",id);
+          var index = tr.data('index');
+          var category = currentCategory.children[index];
+          $(this).find('.modal-body').text("是否删除  \""+category.name+"\" 分类?");
+          $(this).find('#delCategoryBtn').data("id",category.id);
     });
     
     //编辑属性名模态窗
     $('#editAttributenameDialog').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         var tr = $(button).parentsUntil("tbody").filter("tr");
-        var id = tr.data('id');
-        var name = $(tr).children("td:first").text();
-        $(this).find("[name='attributename']").val(name);
-        $(this).find('#editAttributenameBtn').attr("data-id",id);
+        var index = tr.data('index');
+        var attribute = currentCategory.attributes[index];
+        $(this).find("[name='attributename']").val(attribute.name);
+        $(this).find('#editAttributenameBtn').data("id",attribute.id);
     })
     
     //删除属性名模态窗 
     $('#delAttributenameDialog').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         var tr = $(button).parentsUntil("tbody").filter("tr");
-        var id = tr.data('id');
-        var name = $(tr).children("td:first").text();
-        $(this).find('.modal-body').text("是否删除  \""+name+"\"属性?");
-        $(this).find('#delAttributenameBtn').attr("data-id",id);
+        var index = tr.data('index');
+        var attribute = currentCategory.attributes[index];
+        $(this).find('.modal-body').text("是否删除  \""+attribute.name+"\"属性?");
+        $(this).find('#delAttributenameBtn').data("id",attribute.id);
+    });
+
+    //添加属性值模态窗 
+    $('#addAttributevalueDialog').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var tr = $(button).parentsUntil("tbody").filter("tr");
+        var index = tr.data('index');
+        var attribute = currentCategory.attributes[index];
+        $(this).find("[name='attributename']").val(attribute.name);
+        $(this).find('#addAttributevalueBtn').data("id",attribute.id);
+    });
+
+    //删除属性值模态窗 
+    $('#delAttributevalueDialog').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var tr = $(button).parentsUntil("tbody").filter("tr");
+        var index = tr.data('index');
+        var attribute = currentCategory.attributes[index];
+        var attrs = $(tr).find(":checked");
+        if(attrs.length==0){
+            $(this).find('.modal-body').text("您没有勾选任何属性值!");
+            $('#delAttributevalueBtn').prop("disabled",true);
+            return;
+        }else{
+            $(this).find('.modal-body').text("确认删去所选的属性值");
+            $('#delAttributevalueBtn').prop("disabled",false);
+            $(this).find('#delAttributevalueBtn').data("id",attribute.id);
+        }
     });
       
     //编辑属性值模态窗
@@ -410,231 +416,98 @@ $(function(){
         $("#editAttributevalueForm").html("");
         $(attributeHtml).appendTo($("#editAttributevalueForm")); 
     })
-
-    //删除属性值模态窗 
-    $('#delAttributevalueDialog').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var tr = $(button).parentsUntil("tbody").filter("tr");
-        var id = tr.data('id');
-        var attrs = $(tr).find("input[name='attributevalue']:checked");
-        if(attrs.length==0){
-            $(this).find('.modal-body').text("您没有勾选任何属性值!");
-            $('#delAttributevalueBtn').prop("disabled",true);
-            return;
-        }else{
-            $(this).find('.modal-body').text("确认删去所选的属性值");
-            $('#delAttributevalueBtn').prop("disabled",false);
-            $(this).find('#delAttributevalueBtn').attr("data-id",id);
-        }
-    });
     
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     
     //添加分类操作
     $("#addCategoryBtn").on("click",function(){
-        var name = $("#addCategoryForm").find("[name='catname']").val();
-        $.ajax({
-            "url": sdkPath+"/categorys",
-            "type": "POST",
-            "data": JSON.stringify({"catName":name,"parentId":parentId}),
-            "dataType":"json",      
-            "contentType":"application/json",
-        }).success(function(data){
-            $("#addCategoryDialog").modal("hide");
-            $("#addCategoryForm").find("[name='catname']").val("");
-            createCategoryTree($(".categorytree"));
-            getCategoryChildren(parentId);
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
+        var category = {};
+        category.name = $("#addCategoryForm").find("[name='catname']").val();
+        category.parentId = currentCategory.id;
+        addCategory(category);
     });
     
     //编辑分类操作
     $("#editCategoryBtn").on("click",function(){
-        name = $("#editCategoryForm").find("[name='catname']").val();
-        var catId = $(this).attr("data-id");
-        $.ajax({
-            "url":sdkPath+"/categorys/"+catId,
-            "type": "PUT",
-            "data": JSON.stringify({"catId":catId,"catName":name}),
-            "dataType":"json",      
-            "contentType":"application/json",
-        }).success(function(data){
-            $("#editCategoryDialog").modal("hide");
-            createCategoryTree($(".categorytree"));
-            getCategoryChildren(parentId);
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
+        var category = {};
+        category.id = $(this).data("id");
+        category.name = $("#editCategoryForm").find("[name='catname']").val();
+        editCategory(category);
     });
     
     //删除分类操作
     $("#delCategoryBtn").on("click",function(){
-        var catId = $(this).attr("data-id");
-        $.ajax({
-            "url": sdkPath+"/categorys/"+catId,
-            "type": "DELETE",
-            "dataType":"json",      
-            "contentType":"application/json",    
-        }).success(function(data){
-            $("#delCategoryDialog").modal("hide");
-            createCategoryTree($(".categorytree"));
-            getCategoryChildren(parentId);
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
+        var catId = $(this).data("id");
+        delCategory(catId);
     });
     
     //添加属性操作
     $("#addAttributeBtn").on("click",function(){
-        var  attributename=$("#addAttributeForm").find("[name='attributename']").val();
-        var  attributevalues=$("#addAttributeForm").find("[name='attributevalue']").val();
-         $.ajax({
-             "url": sdkPath+"/attributes",
-             "type": "POST",
-             "data": JSON.stringify({"catId":parentId,"attributename":attributename,"attributevalues":attributevalues}),
-             "dataType":"json",      
-             "contentType":"application/json",
-         }).success(function(data){
-             $("#addAttributeDialog").modal("hide");
-             $("#addAttributeForm").find("[name='catname']").val("")
-             $("#addAttributeForm").find("[name='attributename']").val("")
-             $("#addAttributeForm").find("[name='attributevalue']").val("");
-             createCategoryTree($(".categorytree"));
-             getAttributeByCategory(parentId);
-         }).fail(function(){
-             console.log("connect "+this.url+" failed!");
-             return null;
-         });
+        var valueStr = $("#addAttributeForm").find("[name='attributevalue']").val();
+        var valueArray = valueStr.split(/,|，/);
+        var attribute = {};
+        attribute.name = $("#addAttributeForm").find("[name='attributename']").val();
+        attribute.categoryId = currentCategory.id;
+        attribute.values = [];
+        for(var i=0; i<valueArray.length; i++){
+            var str = $.trim(valueArray[i]);
+            if(str.length>0){
+                var value = {};
+                value.value = str;
+                attribute.values.push(value);
+            }
+        }
+        addAttribute(attribute);
      });
    
     //编辑属性名操作
     $("#editAttributenameBtn").on("click",function(){
-        name = $("#editAttributenameForm").find("[name='attributename']").val();
-        var attriId = $(this).attr("data-id");
-        $.ajax({
-            "url":sdkPath+"/attributename",
-            "type": "PUT",
-            "data": JSON.stringify({"attriId":attriId,"attriName":name}),
-            "dataType":"json",      
-            "contentType":"application/json",
-        }).success(function(data){
-            $("#editAttributenameDialog").modal("hide");
-            createCategoryTree($(".categorytree"));
-            getAttributeByCategory(parentId);
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
+        var attribute = {};
+        attribute.id = $(this).data("id");
+        attribute.name = $("#editAttributenameForm").find("[name='attributename']").val();
+        editAttribute(attribute);
     });
     
     //删除属性名操作
     $("#delAttributenameBtn").on("click",function(){
-        var attriId = $(this).attr("data-id");
-        $.ajax({
-            "url": sdkPath+"/attrcondition/"+attriId,
-            "type": "GET",
-            "dataType":"json",      
-            "contentType":"application/json",    
-        }).success(function(data){
-                //这里应做出判断提示 data.listsize>0
-                   $.ajax({
-                   "url": sdkPath+"/attributename",
-                   "type": "DELETE",
-                   "data": JSON.stringify({"attriId":attriId}),
-                   "dataType":"json",      
-                   "contentType":"application/json",    
-               }).success(function(data){
-                   $("#delAttributenameDialog").modal("hide");
-                   createCategoryTree($(".categorytree"));
-                   getAttributeByCategory(parentId);
-               }).fail(function(){
-                   console.log("connect "+this.url+" failed!");
-                   return null;
-               }); 
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
+        var attriId = $(this).data("id");
+        delAttribute(attriId);
+    });
+    
+    //添加属性名操作
+    $("#addAttributevalueBtn").on("click",function(){
+        var attriId = $(this).data("id");
+        
+        var valueStr = $("#addAttributevalueForm").find("[name='attributevalue']").val();
+        var valueArray = valueStr.split(/,|，/);
+        var values = [];
+        for(var i=0; i<valueArray.length; i++){
+            var str = $.trim(valueArray[i]);
+            if(str.length>0){
+                values.push(str);
+            }
+        }
+        if(values.length>0){
+            addAttributeValue(attriId, values);
+        }
+        $("#addAttributevalueDialog").modal("hide");
+    });
+    
+    //删除属性值操作
+    $("#delAttributevalueBtn").on("click",function(){
+        var id = $(this).data('id');
+        var attrs = $("#attributeTable tr[data-id='"+id+"']").find(":checked");
+        var valueIds = [];
+        for(var i=0;i<attrs.length;i++){
+            valueIds.push($(attrs[i]).data("id"));
+        }
+        delAttributeValue(id, valueIds);
     });
     
     //编辑属性值操作
     $("#editAttributevalueBtn").on("click",function(){
-        var  attributeNameId = $(this).attr("data-targetId");
-        var attrbuteNodes=$("#editAttributevalueForm").find("[name='attributevalue']");
-        var attrbute=new Object();
-        attrbute.attrIds=new Array();
-        attrbute.attributes=new Array();
-        attrbute.attributenameId=attributeNameId;
-        for(var i=0;i<attrbuteNodes.length;i++){
-            attrbute.attrIds.push(attrbuteNodes[i].id);
-            attrbute.attributes.push(attrbuteNodes[i].value);
-        }
-        $.ajax({
-            "url": sdkPath+"/attributevalue",
-            "type": "PUT",
-            "data": JSON.stringify(attrbute),
-            "dataType":"json",      
-            "contentType":"application/json",    
-        }).success(function(data){
-            $("#editAttributevalueDialog").modal("hide");
-            createCategoryTree($(".categorytree"));
-            getAttributeByCategory(parentId);
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
     });
-    
-    //编辑属性值操作
-    $("#delAttributevalueBtn").on("click",function(){
-        var id = $(this).data('id');
-        var attrs = $("tr[data-id='"+id+"']").find("input[name='attributevalue']:checked");
-        var attributeValue=new Object();
-        attributeValue.attrvalues=new Array();
-        for(var i=0;i<attrs.length;i++){
-               if(attrs[i].checked==true){
-                   attributeValue.attrvalues.push(attrs[i].value);
-               }
-            }
-        $.ajax({
-            "url": sdkPath+"/attributevalue",
-            "type": "DELETE",
-            "data": JSON.stringify(attributeValue),
-            "dataType":"json",      
-            "contentType":"application/json",
-        }).success(function(data){
-            $("#delAttributevalueDialog").modal("hide");
-            $("#addAttributevalueForm").find("[name='catname']").val("")
-            createCategoryTree($(".categorytree"));
-            getAttributeByCategory(parentId);
-        }).fail(function(){
-            console.log("connect "+this.url+" failed!");
-            return null;
-        });
-    });
-    
-     function deleteAttrivalue(id){
-    	 var attributeValue=new Object();
-         attributeValue.attrvalues=new Array();
-         attributeValue.attrvalues.push(id);
-    	   $.ajax({
-               "url": sdkPath+"/attributevalue",
-               "type": "DELETE",
-               "data": JSON.stringify(attributeValue),
-               "dataType":"json",      
-               "contentType":"application/json",
-           }).success(function(data){
-               createCategoryTree($(".categorytree"));
-           }).fail(function(){
-               console.log("connect "+this.url+" failed!");
-               return null;
-           });
-    }
     
 });
 </script>

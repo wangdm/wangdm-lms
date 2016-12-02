@@ -342,14 +342,16 @@ body {
   border-right:1px dashed rgb(183,183,183);
   width:210px;
   height:100%;
-  padding:20px;
+  padding:10px 20px;
+  margin-top:10px;
   float:left;
   overflow: auto;
 }
 
 .rightcontent{
-    float:left;
-    padding:20px;
+  float:left;
+  padding:10px 20px;
+  margin-top:10px;
 }
 
 .rightcontent .panel-body{

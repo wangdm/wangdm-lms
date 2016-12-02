@@ -12,9 +12,11 @@ public interface AttributeService extends Service {
     
     public void addAttributeValue(Serializable id, List<String> values);
     
-    public void delAttributeValue(List<Serializable> valueIds);
+    public void delAttributeValue(List<Long> valueIds);
     
     public void editAttributeValue(List<AttributeValueDto> valueDtoList);
+
+    public List<AttributeValueDto> getAttributeValue(Serializable attributeId);
     
     public List<AttributeMapDto> getEntityAttribute(Serializable entityId, EntityType entityType);
 

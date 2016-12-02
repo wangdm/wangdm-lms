@@ -16,6 +16,9 @@ public class AttributeNameDto extends BaseDto {
 
     @DtoMapper(entity = AttributeName.class, field = "index")
     private String index;
+
+    @DtoMapper(entity = AttributeName.class, field = "category.id")
+    private String categoryId;
     
     private List<AttributeValueDto> values;
 
@@ -46,6 +49,14 @@ public class AttributeNameDto extends BaseDto {
 
     public void setIndex(String index) {
         this.index = index;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public List<AttributeValueDto> getValues() {

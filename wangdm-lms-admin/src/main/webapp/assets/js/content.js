@@ -1369,11 +1369,8 @@ function createUserTable(data)
 /// 课程分类
 ///////////////////////////////////////////////////////////////////////////////
 
-function addCategory(name)
+function addCategory(cat)
 {
-  var cat = {
-      "name" : name
-  };
   $.ajax({
       "url" : sdkPath + "/categorys",
       "type" : "POST",
@@ -1382,28 +1379,28 @@ function addCategory(name)
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#addCategoryDialog").modal("hide");
+      createCategoryTree($(".categorytree"));
+      getCategoryChildren(cat.parentId);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
   });
 }
 
-function editCategory(id, name)
+function editCategory(cat)
 {
-  var cat = {
-      "name" : name,
-      "id" : id
-  };
   $.ajax({
-      "url" : sdkPath + "/categorys/" + id,
+      "url" : sdkPath + "/categorys/" + cat.id,
       "type" : "PUT",
       "data" : JSON.stringify(cat),
       "dataType" : "json",
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#editCategoryDialog").modal("hide");
+      createCategoryTree($(".categorytree"));
+      getCategoryChildren(currentCategory.id);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1418,7 +1415,9 @@ function delCategory(id)
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#delCategoryDialog").modal("hide");
+      createCategoryTree($(".categorytree"));
+      getCategoryChildren(currentCategory.id);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1429,14 +1428,13 @@ function createCategoryTable(data)
 {
   if (!data)
   {
+      $("#categoryTable tbody").html("");
       return;
   }
   var tablestr = "";
   for (var i = 0; i < data.length; i++)
   {
-      tablestr += "<tr data-id=\""
-              + data[i].id
-              + "\">"
+      tablestr += "<tr data-id=\"" + data[i].id + "\" data-index=\"" + i + "\">"
               + "  <td>"
               + data[i].name
               + "</td>"
@@ -1452,10 +1450,11 @@ function createCategoryTable(data)
 function getCategoryChildren(id)
 {
   $.ajax({
-      "url" : sdkPath + "/category/" + id + "/children",
+      "url" : sdkPath + "/categorys/" + id + "/children",
       "type" : "GET",
   }).success(function(data)
   {
+      currentCategory.children = data;
       createCategoryTable(data);
   }).fail(function()
   {
@@ -1480,14 +1479,13 @@ function createCategoryTree(node)
 {
 
   $.ajax({
-      "url" : sdkPath + "/category/1/tree",
+      "url" : sdkPath + "/categorys/1/tree",
       "type" : "GET",
   }).success(function(data)
   {
       categoryTree = data;
       d = new dTree('d');
       recursiveCategoryTree(d, -1, data);
-      console.log(categoryTree);
       node.html(d.toString());
   }).fail(function()
   {
@@ -1504,14 +1502,15 @@ function createCategoryTree(node)
 function addAttribute(attribute)
 {
   $.ajax({
-      "url" : sdkPath + "/attribute",
+      "url" : sdkPath + "/attributes",
       "type" : "POST",
       "data" : JSON.stringify(attribute),
       "dataType" : "json",
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#addAttributeDialog").modal("hide");
+      getCategoryAttribute(attribute.categoryId);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1521,14 +1520,15 @@ function addAttribute(attribute)
 function editAttribute(attribute)
 {
   $.ajax({
-      "url" : sdkPath + "/attribute/" + attribute.id,
+      "url" : sdkPath + "/attributes/" + attribute.id,
       "type" : "PUT",
       "data" : JSON.stringify(attribute),
       "dataType" : "json",
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#editAttributenameDialog").modal("hide");
+      getCategoryAttribute(currentCategory.id);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1538,12 +1538,13 @@ function editAttribute(attribute)
 function delAttribute(id)
 {
   $.ajax({
-      "url" : sdkPath + "/attribute/" + id,
+      "url" : sdkPath + "/attributes/" + id,
       "type" : "DELETE",
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#delAttributenameDialog").modal("hide");
+      getCategoryAttribute(currentCategory.id);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1553,14 +1554,14 @@ function delAttribute(id)
 function addAttributeValue(id,strArray)
 {
   $.ajax({
-      "url" : sdkPath + "/attribute/" + id + "/value",
+      "url" : sdkPath + "/attributes/" + id + "/value",
       "type" : "POST",
       "data" : JSON.stringify(strArray),
       "dataType" : "json",
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      getCategoryAttribute(currentCategory.id);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1570,7 +1571,7 @@ function addAttributeValue(id,strArray)
 function editAttributeValue(attribute)
 {
   $.ajax({
-      "url" : sdkPath + "/attribute/" + attribute.id + "/value",
+      "url" : sdkPath + "/attributes/" + attribute.id + "/value",
       "type" : "PUT",
       "data" : JSON.stringify(attribute.values),
       "dataType" : "json",
@@ -1587,14 +1588,15 @@ function editAttributeValue(attribute)
 function delAttributeValue(id, idArray)
 {
   $.ajax({
-      "url" : sdkPath + "/attribute/" + id + "/value",
+      "url" : sdkPath + "/attributes/" + id + "/value",
       "type" : "DELETE",
       "data" : JSON.stringify(idArray),
       "dataType" : "json",
       "contentType" : "application/json",
   }).success(function(data)
   {
-      console.log(data);
+      $("#delAttributevalueDialog").modal("hide");
+      getCategoryAttribute(currentCategory.id);
   }).fail(function()
   {
       console.log("connect " + this.url + " failed!");
@@ -1605,41 +1607,44 @@ function createAttributeTable(data)
 {
   if (!data)
   {
+      $("#attributeTable tbody").html("");
       return;
   }
   var tablestr = "";
   for (var i = 0; i < data.length; i++)
   {
-      tablestr += "<tr data-id=\""
-              + data[i].id
-              + "\">"
+      tablestr += "<tr data-id=\"" + data[i].id + "\" data-index=\"" + i + "\">"
               + "  <td>"
               + data[i].name
               + "  </td>"
               + "  <td>";
       var values = data[i].values;
-      for(var j = 0; j< values.leagth; j++)
-      {
-          tablestr += "<label><input type=\"checkbox\">"+values[j].value+"</label>";
+      if(values){
+          for(var j = 0; j< values.length; j++)
+          {
+              tablestr += "<label style=\"margin:0px 4px;font-weight:normal\"><input type=\"checkbox\" data-id=\""+values[j].id+"\">"+values[j].value+"</label>";
+          }
       }
       tablestr += "  </td>"
-              + "  <td><div class=\"btn-group\" role=\"group\">"
-              + "    <button type=\"button\" class=\"btn btn-default\">Left</button>"
-              + "    <button type=\"button\" class=\"btn btn-default\">Middle</button>"
-              + "    <button type=\"button\" class=\"btn btn-default\">Right</button>"
+              + "  <td><div class=\"btn-group btn-group-sm\" role=\"group\">"
+              + "    <button type=\"button\" class=\"btn btn-warning\" data-toggle=\"modal\" data-target=\"#editAttributenameDialog\">编辑属性</button>"
+              + "    <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#delAttributenameDialog\">删除属性</button>"
+              + "    <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#addAttributevalueDialog\">添加属性值</button>"
+              + "    <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#delAttributevalueDialog\">删除属性值</button>"
               + "  </div></td>"
               + "</tr>";
   }
-  $("#categoryTable tbody").html(tablestr);
+  $("#attributeTable tbody").html(tablestr);
 }
 
 function getCategoryAttribute(id)
 {
   $.ajax({
-      "url" : sdkPath + "/category/" + id + "/attributes",
+      "url" : sdkPath + "/categorys/" + id + "/attributes",
       "type" : "GET",
   }).success(function(data)
   {
+      currentCategory.attributes = data;
       createAttributeTable(data);
   }).fail(function()
   {
