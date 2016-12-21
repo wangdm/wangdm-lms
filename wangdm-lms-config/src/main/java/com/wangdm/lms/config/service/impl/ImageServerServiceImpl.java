@@ -21,7 +21,7 @@ public class ImageServerServiceImpl extends ConfigServiceImpl implements ImageSe
     @Override
     public String getImageUploadUrl() {
 
-        return getConfig(KeyValue.imageUploadUrl, "");
+        return getConfig(KeyValue.imageUploadUrl, "upload/image");
     }
 
     @Override

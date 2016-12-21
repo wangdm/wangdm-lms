@@ -9,7 +9,7 @@
 <body>
 
 <div class="lefttree">
-    <c:import url="categorytree.jsp"></c:import>
+    <#include "categorytree.jsp">
 </div>
 
 <div class="rightcontent">
@@ -67,20 +67,6 @@
              </tr>
         </thead>
         <tbody>
-      <!--<c:forEach  items="${ liveList}"  var="live">
-             <tr style="border:1px solid red">
-                 <td><input type="checkbox" name="live" data-id="${live.id }"></td>
-                 <td>${live.sn}</td>
-                 <td>${live.title}</td>
-                 <td>${live.userName}</td>
-                  <td>333</td>
-                 <td>${live.startTime }</td>
-                 <td>${live.status}</td>
-                 <td>${live.favtimes}</td>
-                  <td><a href="#editLiveDialog" data-toggle="modal">编辑</a></td>
-           </tr>
-          </c:forEach>
-          -->
         </tbody>
     </table>
     <div id="NoDataWarning" class="alert alert-warning" role="alert" style="padding:5px 15px;text-align:center;display:none">
@@ -98,91 +84,54 @@
         <h4 class="modal-title">添加直播</h4>
       </div>
       <div class="modal-body">
-          <form  class="form-horizontal" id="AddLiveForm" name="AddLiveForm">
-              
-                <div class="form-group" >
-                
-                   <div class="col-md-2 text-right"  style="line-height:36px">
-                              编号：
-                      </div>
-                      <div class="col-md-4">
-                           <input type="text" class="form-control" name="sn">
-                      </div>
-                      
-                    <div class="col-md-2 text-right"  style="line-height:36px">
-                        标题：
-                      </div>
-                      <div class="col-md-4">
-                              <input type="text" class="form-control " name="title">
-                      </div>
-                      
+        <form  class="form-horizontal" id="AddLiveForm" name="AddLiveForm">
+          <div class="form-group" >
+            <label for="sn" class="col-sm-3 control-label">编号：</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="sn">
+            </div>
+          </div>
+          <div class="form-group" >
+            <label for="title" class="col-sm-3 control-label">标题：</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="title">
+            </div>
+          </div>
+          <div class="form-group">
+            <label  class="col-sm-3 control-label">课程分类：</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="category" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="startTime" class="col-sm-3 control-label">开始时间：</label>
+              <div class="col-sm-8">
+                  <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="startTime" placeholder="开始时间" onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-09-10 11:30'})" >
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="endTime" class="col-sm-3 control-label">结束时间：</label>
+            <div class="col-sm-8">
+                 <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="endTime" placeholder="开始时间" onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-09-10 11:30'})">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="imagefile" class="col-sm-3 control-label">封面图片：</label>
+            <div class="col-md-4">
+                <div id="imagefile" class="imagefile" style="width:100%;border:none;height:100px;line-height:100px;font-size:15px;position:relative;text-align:center">
+                    <i class="iconfont"  style="font-size:60px;top:-5%;left:32%;display:block;position:absolute;">&#xe632;</i>
+                    <img  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;" />
+                    <input type="file" class="form-control" name="imagefile" accept="image/jpeg,image/png"  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;opacity:0"/>
                 </div>
-                
-                
-                     <div class="form-group" >
-                        <div class="col-md-2 text-right"  style="line-height:36px">分类：</div>
-                        <div class="col-sm-10">
-                                  <select class="form-control" name="categoryId"   id="category"  style="border:1px solid #ccc;">
-                                         <c:forEach  items="${categoryList}" var="category" >
-                                              <option value="${category.catId}">${category.catName }</option>
-                                         </c:forEach>
-                                    </select>
-                        </div>
-                    </div>
-                    
-                 <div   id="attr-list">
-                        
-                 </div>
-                  
-                   <div class="form-group" >
-                    <div class="col-md-2 text-right"  style="line-height:36px">
-                      开始时间：
-                      </div>
-                      <div class="col-md-4">
-                          <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="startTime" placeholder="开始时间"   onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-11-01 11:30'})">
-                      </div>
-                         <div class="col-md-2 text-right"  style="line-height:36px">
-                       结束时间：
-                      </div>
-                      <div class="col-md-4">
-                              <input type="text" name="endTime" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;"  placeholder="结束时间"  onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-11-10 11:30'})">
-                      </div>
-                </div>
-                
-                  <div class="form-group">
-                    <div class="col-md-2 text-right"  style="line-height:36px">封面图片：</div>
-                    <div class="col-md-4">
-                        <div id="imagefile" class="imagefile" style="width:100%;border:none;height:100px;line-height:100px;font-size:15px;position:relative;text-align:center">
-                            <i class="iconfont"  style="font-size:60px;top:-5%;left:32%;display:block;position:absolute;">&#xe632;</i>
-                            <img  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;" />
-                            <input type="file" class="form-control" name="imagefile" accept="image/jpeg,image/png"  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;opacity:0"/>
-                        </div>
-                    </div>
-                    
-                      <!--  直播室
-                      <div class="col-md-2 text-right"  style="line-height:36px">直播室：</div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                            <input type="text" class="form-control" name="room" placeholder="选择直播室" readonly>
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button" data-toggle="modal" data-target="#ChooseRoomDialog"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                          </div>
-                        </div>
-                        -->
-                  </div>
-                  
-              
-              
-               <div class="form-group" >
-                    <div class="col-md-2 text-right"  style="line-height:36px">
-                       简介：
-                      </div>
-                      <div class="col-md-10">
-                           <textarea class="form-control" name="description" rows="4"></textarea>
-                      </div>
-                </div>
-         </form>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-sm-3 control-label">简介：</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" name="description" rows="4"></textarea>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">取消</button>
@@ -220,90 +169,54 @@
         <h4 class="modal-title">编辑直播</h4>
       </div>
       <div class="modal-body">
-          <form  class="form-horizontal" id="editLiveForm" name="EditLiveForm">
-          
-            <div class="form-group" >
-            
-                      <div class="col-md-2 text-right"  style="line-height:36px">
-                           编号：
-                      </div>
-                      <div class="col-md-4">
-                           <input type="text" class="form-control" name="livesn">
-                      </div>
-                      
-                      <div class="col-md-2 text-right"  style="line-height:36px">
-                            标题：
-                      </div>
-                      <div class="col-md-4">
-                              <input type="text" class="form-control " name="livetitle">
-                      </div>
-                       
+        <form  class="form-horizontal" id="editLiveForm" name="EditLiveForm">
+          <div class="form-group" >
+            <label for="sn" class="col-sm-3 control-label">编号：</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="sn">
+            </div>
+          </div>
+          <div class="form-group" >
+            <label for="title" class="col-sm-3 control-label">标题：</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="title">
+            </div>
+          </div>
+          <div class="form-group">
+            <label  class="col-sm-3 control-label">课程分类：</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="category" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="startTime" class="col-sm-3 control-label">开始时间：</label>
+              <div class="col-sm-8">
+                  <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="startTime" placeholder="开始时间" onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-09-10 11:30'})" >
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="endTime" class="col-sm-3 control-label">结束时间：</label>
+            <div class="col-sm-8">
+                 <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="endTime" placeholder="开始时间" onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-09-10 11:30'})">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="imagefile" class="col-sm-3 control-label">封面图片：</label>
+            <div class="col-md-4">
+                <div id="imagefile" class="imagefile" style="width:100%;border:none;height:100px;line-height:100px;font-size:15px;position:relative;text-align:center">
+                    <i class="iconfont"  style="font-size:60px;top:-5%;left:32%;display:block;position:absolute;">&#xe632;</i>
+                    <img  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;" />
+                    <input type="file" class="form-control" name="imagefile" accept="image/jpeg,image/png"  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;opacity:0"/>
                 </div>
-              
-                   <div class="form-group">
-                        <div class="col-md-2 text-right"  style="line-height:36px">分类：</div>
-                        <div class="col-sm-10">
-                               <select class="form-control" name="categoryId"   id="livecategory"  style="border:1px solid #ccc;">
-                                         <c:forEach  items="${categoryList}" var="category" >
-                                              <option value="${category.catId}">${category.catName }</option>
-                                         </c:forEach>
-                                    </select>
-                        </div>
-                    </div>
-                  
-                    <div   id="attr-list-update">
-                        
-                     </div>
-              
-                <div class="form-group" >
-                    <div class="col-md-2 text-right"  style="line-height:36px">
-                      开始时间：
-                      </div>
-                      <div class="col-md-4">
-                           <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="livestarttime" placeholder="开始时间"   onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-11-01 11:30'})">
-                      </div>
-                         <div class="col-md-2 text-right"  style="line-height:36px">
-                       结束时间：
-                      </div>
-                      <div class="col-md-4">
-                          <input type="text" class="Wdate form-control"   style="height:34px;border:1px solid #ccc;" name="liveendtime" placeholder="开始时间"   onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2016-11-10 11:30'})">
-                      </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-md-2 text-right"  style="line-height:36px">封面图片：</div>
-                    <div class="col-md-4">
-                        <div id="imagefileUpdate" class="imagefile" style="width:100%;border:0;height:100px;line-height:100px;font-size:16px;position:relative;text-align:center">
-                           上传图片
-                            <img  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;"  data-url=""/>
-                            <input type="file" class="form-control" name="imagefile" accept="image/jpeg,image/png"  style="width:100%;height:100%;border:0;top:0px;left:0px;position:absolute;opacity:0"/>
-                        </div>
-                    </div>
-                    
-                    <!--  直播室
-                      <div class="col-md-2 text-right"  style="line-height:36px">直播室：</div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                            <input type="text" class="form-control" name="liveroom" placeholder="选择直播室" readonly>
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button" data-toggle="modal" data-target="#ChooseRoomDialog"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                          </div>
-                    </div>
-                    -->
-                 </div>
-                  
-               
-                 <div class="form-group" >
-                    <div class="col-md-2 text-right"  style="line-height:36px">
-                       简介：
-                      </div>
-                      <div class="col-md-10">
-                           <textarea class="form-control" name="livedesc" rows="4"></textarea>
-                      </div>
-                </div>
-                
-         </form>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-sm-3 control-label">简介：</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" name="description" rows="4"></textarea>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">取消</button>
@@ -487,7 +400,6 @@
     var attrIds=[];
     var liveId;
     var initcategoryId=$("#category").find("option:selected").val();
-    $("#category").find("option:selected").val();
     findAllTypeList(initcategoryId,"1");
     
     

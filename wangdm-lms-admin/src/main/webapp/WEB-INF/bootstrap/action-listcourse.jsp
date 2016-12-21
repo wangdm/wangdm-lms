@@ -11,7 +11,7 @@
 <body>
 
 <div class="lefttree">
-    <c:import url="categorytree.jsp"></c:import>
+    <#include "categorytree.jsp">
 </div>
 
 <div class="rightcontent">
@@ -110,9 +110,11 @@
                 <label for="coursetype" class="col-sm-3 control-label">课程类型：</label>
                 <div class="col-sm-8">
                     <select class="form-control" name="coursetype">
-                    <c:forEach var="type" items="${coursetypeList}">
-                        <option data-id="${type.key}">${type.value}</option>
-                    </c:forEach>
+                    <#if coursetypeList??>
+                    <#list coursetypeList?keys as key >
+                        <option data-id="${key}">${coursetypeList["${key}"]}</option>
+                    </#list>
+                    </#if>
                     </select>
                 </div>
               </div>
@@ -143,32 +145,12 @@
                     </div>
                 </div>
               </div>
-			<div class="form-group">
-				<label  class="col-sm-3 control-label">课程分类：</label>
-					<div class="col-sm-8">
-						<select name="categoryId" id="category" class="form-control"
-								style="border: 1px solid #ccc;">
-							<c:forEach items="${categoryList}" var="category">
-								<option value="${category.catId}">${category.catName }</option>
-							</c:forEach>
-						</select>
-					</div>
-			</div>          
-
-			<div id="attr-list">
-				<c:forEach items="${attrNameValueList }" var="attrNameValue">
-					<div class="form-group">
-						<label for="subject" class="col-sm-3 control-label" >${attrNameValue.key.attriName }：</label>
-							<div class="col-sm-8">
-								<select class="form-control" style="border: 1px solid #ccc;">
-									<c:forEach items="${attrNameValue.value}" var="valueItem">
-										<option data-id="${valueItem.id}" value="${valueItem.id}">${valueItem.value}</option>
-									</c:forEach>
-								</select>
-							</div>
-					</div>
-				</c:forEach>
-			</div>
+			  <div class="form-group">
+				<label for="category" class="col-sm-3 control-label">课程分类：</label>
+				<div class="col-sm-8">
+                    <input type="text" class="form-control" name="category" readonly>
+				</div>
+			  </div> 
               <div class="form-group">
                 <label for="coursedesc" class="col-sm-3 control-label">简介：</label>
                 <div class="col-sm-8">
@@ -260,32 +242,12 @@
                     </div>
                 </div>
               </div>
-			<div class="form-group">
+			  <div class="form-group">
 				<label  class="col-sm-3 control-label">课程分类：</label>
-					<div class="col-sm-8">
-						<select name="categoryId" id="category-edit" class="form-control"
-								style="border: 1px solid #ccc;">
-							<c:forEach items="${categoryList}" var="category">
-								<option data-id="${category.catId}" value="${category.catId}">${category.catName }</option>
-							</c:forEach>
-						</select>
-					</div>
-			</div>          
-
-			<div id="attr-list">
-				<c:forEach items="${attrNameValueList }" var="attrNameValue">
-					<div class="form-group">
-						<label for="subject" class="col-sm-3 control-label" >${attrNameValue.key.attriName }：</label>
-							<div class="col-sm-8">
-								<select name="attr-edit" class="form-control" style="border: 1px solid #ccc;">
-									<c:forEach items="${attrNameValue.value}" var="valueItem">
-										<option data-id="${valueItem.id}" value="${valueItem.id}">${valueItem.value}${valueItem.id}</option>
-									</c:forEach>
-								</select>
-							</div>
-					</div>
-				</c:forEach>
-			</div>
+			      <div class="col-sm-8">
+                    <input type="text" class="form-control" name="category" readonly>
+				  </div>
+			  </div>  
               <div class="form-group">
                 <label for="coursedesc" class="col-sm-3 control-label">简介：</label>
                 <div class="col-sm-8">
@@ -495,7 +457,6 @@
 					</button>
 					<div id="title">
 						<h4 class="modal-title"></h4>
-						
 					</div>
 				</div>
 				<div class="modal-body">

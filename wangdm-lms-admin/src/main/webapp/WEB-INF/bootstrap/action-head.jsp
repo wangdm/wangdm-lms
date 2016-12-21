@@ -44,4 +44,5 @@
 var contextPath = "${contextPath}";
 var sdkPath = "${modularConfig.sdkHostUrl}";
 var webPath = "${modularConfig.webHostUrl}";
+var imageUploadUrl = "${imageServer.imageUploadUrl}";
 </script>

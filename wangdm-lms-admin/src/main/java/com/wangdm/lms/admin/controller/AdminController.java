@@ -1,7 +1,8 @@
 package com.wangdm.lms.admin.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wangdm.core.dto.Dto;
-import com.wangdm.core.query.Query;
-import com.wangdm.lms.admin.utils.PageUtil;
-import com.wangdm.lms.course.dto.LiveDto;
+import com.wangdm.lms.course.constant.CourseType;
 import com.wangdm.lms.course.query.LiveQuery;
 import com.wangdm.lms.course.service.CategoryService;
 import com.wangdm.lms.course.service.CourseService;
@@ -26,7 +24,6 @@ import com.wangdm.lms.course.service.LiveService;
 import com.wangdm.ui.dto.MenuShowDto;
 import com.wangdm.ui.service.BlogRollService;
 import com.wangdm.ui.service.MenuService;
-import com.wangdm.user.dto.UserAccountDto;
 import com.wangdm.user.dto.UserSessionDto;
 import com.wangdm.user.service.UserService;
 
@@ -153,6 +150,13 @@ public class AdminController {
 	{
         ModelAndView model = new ModelAndView("action-listcourse");
         
+        CourseType courseTypeArray[] = CourseType.values();
+        Map<String, String> courseTypeMap = new HashMap<String, String>(courseTypeArray.length);
+        for(int i=0; i<courseTypeArray.length; i++){
+            courseTypeMap.put(courseTypeArray[i].toString(), courseTypeArray[i].getName());
+        }
+        model.addObject("coursetypeList", courseTypeMap);
+        
 		return model;
 	}
     
@@ -177,26 +181,7 @@ public class AdminController {
 	public ModelAndView listLive(HttpServletRequest request,LiveQuery liveQuery)
 	{
         ModelAndView model = new ModelAndView("action-listlive");
-        model.addObject("contextPath", request.getContextPath());
-        model.addObject("sdkPath","/wangdm-lms-sdk");
-        //CategoryQuery queryCategory=new CategoryQuery();
-        //queryCategory.setParentId(Long.valueOf(1));
-        //List<Dto> listCatogoryDto=categoryService.query(queryCategory);
-        liveQuery.setCurrentPage(1);
-        liveQuery.setPageSize(8);
-        Query query=liveQuery;
-        List<Dto> listDto=liveService.query(query);
-        List<Dto> lives=new ArrayList<Dto>(listDto.size());
-        for(Dto dto:listDto){
-            UserAccountDto  userDto=(UserAccountDto)userService.findById(((LiveDto)dto).getUserId());
-            LiveDto liveDto=(LiveDto)dto;
-            liveDto.setUserName(userDto.getUsername());
-            lives.add(liveDto);
-        }
-        model.addObject("liveList",  lives);
-        int totalPage=liveQuery.getTotalPage();
-        model.addObject("pagelist",PageUtil.getPagation(totalPage,liveQuery.getCurrentPage()));
-        //model.addObject("categoryList", listCatogoryDto);
+        
 		return model;
 	}
     
