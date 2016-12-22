@@ -72,7 +72,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
 
         if(dto instanceof AttributeNameDto && dto.getEntityId()>0){
             AttributeNameDto attrNameDto = (AttributeNameDto)dto;
-            AttributeName name = attributeNameDao.findById(AttributeName.class, attrNameDto.getEntityId());
+            AttributeName name = attributeNameDao.findById(attrNameDto.getEntityId(), AttributeName.class);
             if(name != null){
                 List<AttributeValueDto> newValueDtoList = attrNameDto.getValues();
                 if(newValueDtoList!=null && newValueDtoList.size()>0){
@@ -99,7 +99,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
     @Override
     public void delete(Serializable id) {
         
-        AttributeName name = attributeNameDao.findById(AttributeName.class, id);
+        AttributeName name = attributeNameDao.findById(id, AttributeName.class);
         if(name != null){
             attributeMapDao.deleteByColumn("name.id", id);
             attributeValueDao.deleteByColumn("name.id", id);
@@ -111,7 +111,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
     @Override
     public AttributeNameDto findById(Serializable id) {
         
-        AttributeName name = attributeNameDao.findById(AttributeName.class, id);
+        AttributeName name = attributeNameDao.findById(id, AttributeName.class);
         if(name != null){
             AttributeNameDto dto = new AttributeNameDto();
             dto.fromEntity(name);
@@ -139,7 +139,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
     @Override
     public void addAttributeValue(Serializable id, List<String> values) {
 
-        AttributeName name = attributeNameDao.findById(AttributeName.class, id);
+        AttributeName name = attributeNameDao.findById(id, AttributeName.class);
         
         if(values!=null && values.size()>0){
             for(int i=0; i<values.size(); i++){
@@ -173,7 +173,7 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
             
             for(AttributeValueDto valueDto : valueDtoList){
                 
-                AttributeValue value = attributeValueDao.findById(AttributeValue.class, valueDto.getEntityId());
+                AttributeValue value = attributeValueDao.findById(valueDto.getEntityId(), AttributeValue.class);
                 if(value != null){
                     valueDto.toEntity(value);
                     attributeValueDao.update(value);

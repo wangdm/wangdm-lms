@@ -41,7 +41,7 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 
     @Override
     public void delete(Serializable id) {
-        categoryDao.deleteById(Category.class, id);
+        categoryDao.deleteById(id, Category.class);
 
     }
 
@@ -167,7 +167,7 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 	@Override
 	public CategoryDto getCategoryTree(Serializable id) {
 
-	    Category root = categoryDao.findById(Category.class, id);
+	    Category root = categoryDao.findById(id, Category.class);
 	    if(root==null){
 	        return null;
 	    }

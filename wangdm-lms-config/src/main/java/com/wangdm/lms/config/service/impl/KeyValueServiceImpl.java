@@ -36,7 +36,7 @@ public class KeyValueServiceImpl extends BaseService<KeyValue> implements KeyVal
 	@Override
 	public Dto findById(Serializable id) {
 		
-		KeyValue entity = keyvalueDao.findById(KeyValue.class, id);
+		KeyValue entity = keyvalueDao.findById(id, KeyValue.class);
 		if(entity !=null){
 			KeyValueDto dto = new KeyValueDto();
 	    	dto.fromEntity(entity);
