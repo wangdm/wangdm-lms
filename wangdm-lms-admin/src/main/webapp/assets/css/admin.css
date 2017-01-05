@@ -1,7 +1,5 @@
 body {
     font-size: 13px;
-    overflow-y: hidden;
-    overflow-x: hidden;
     font-family: 微软雅黑, Helvetica, STheiti, 宋体, Arial, Tahoma, sans-serif,
         serif;
 }
@@ -302,12 +300,6 @@ body {
 #dashboard-content iframe{
     height: 100%;
     width: 100%;
-}
-
-.iframe-html{
-    width:100%;
-    height:100%;
-    overflow:auto;
 }
 
 .content-wrapper{

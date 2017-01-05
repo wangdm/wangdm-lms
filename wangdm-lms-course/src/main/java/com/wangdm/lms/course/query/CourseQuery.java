@@ -1,34 +1,24 @@
 package com.wangdm.lms.course.query;
 
 import java.util.List;
+import java.util.Map;
 
 import com.wangdm.core.query.BaseQuery;
 import com.wangdm.lms.course.constant.CourseStatus;
 
 public class CourseQuery  extends BaseQuery{
-    private String title;
-    private String userId;
-    private String categoryId;
-    private List<CourseStatus> courseStatus;
-    private int[] queryArray;
     
-    public int[] getQueryArray() {
-        return queryArray;
-    }
+    private String title;
+    
+    private String userId;
+    
+    private String categoryId;
+    
+    private List<CourseStatus> courseStatus;
+    
+    private Map<String, String> attributes;
 
-    public void setQueryArray(int[] queryArray) {
-        this.queryArray = queryArray;
-    }
-
-    public List<CourseStatus> getCourseStatus() {
-		return courseStatus;
-	}
-
-	public void setCourseStatus(List<CourseStatus> courseStatus) {
-		this.courseStatus = courseStatus;
-	}
-
-	public String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -36,21 +26,36 @@ public class CourseQuery  extends BaseQuery{
         this.title = title;
     }
 
-	public String getUserId() {
-		return userId;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public String getCategoryId() {
-		return categoryId;
-	}
+    public String getCategoryId() {
+        return categoryId;
+    }
 
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-    
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public List<CourseStatus> getCourseStatus() {
+        return courseStatus;
+    }
+
+    public void setCourseStatus(List<CourseStatus> courseStatus) {
+        this.courseStatus = courseStatus;
+    }
+
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
     
 }

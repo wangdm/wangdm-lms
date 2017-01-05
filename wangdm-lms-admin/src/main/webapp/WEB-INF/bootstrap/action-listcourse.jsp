@@ -484,6 +484,8 @@ var head='	<div class=\"form-group\"> <div class=\"course_update_chapter\"><a hr
 var strId="-1";
 
 var courseList = new Array();
+var userList = new Array();
+var query = new Object();
 var curCourse;
 var curPage = 0;
 var editCat = {"id":0, "name":"在线学习平台"};
@@ -509,12 +511,12 @@ $(function(){
 		findAttrListEdit(categoryId);
  	});
 	
-    getAllCourse(queryCat.id,queryOwner,queryString,0);
+    getAllCourse(query);
 
     /**************** 分类管理 *****************/
     $(".lefttree").on("click",".node",function(){
-        queryCat.id = $(this).attr("data-id");
-        getAllCourse(queryCat.id,queryOwner,"",0);
+        query.categoryId = $(this).attr("data-id");
+        getAllCourse(query);
     });
 
     /**************** 全选 *****************/

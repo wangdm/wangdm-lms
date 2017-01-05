@@ -12,8 +12,8 @@ function resizeContent()
 
     var bodyWidth = $(window).width() - parseInt($(".lefttree").css("width"));
 
-    $(".rightcontent").css("width", bodyWidth);
-    $(".rightcontent").css("max-width", bodyWidth);
+//    $(".rightcontent").css("width", bodyWidth);
+    $(".rightcontent").css("min-width", bodyWidth);
 
 }
 // ////////////////////////////////////////////////////////////
@@ -1771,17 +1771,14 @@ function delCourse(courseId)
     });
 }
 
-function getAllCourse(catId, uid, query, page)
+function getAllCourse(query)
 {
-    $.ajax(
-            {
-                "url" : sdkPath + "/courses/?catId=" + catId + "&uid=" + uid
-                        + "&query=" + query + "&page=" + page,
-                "type" : "GET",
-                "dataType" : "json",
-                "contentType" : "application/json",
-            }).success(function(data)
-    {
+    $.ajax({
+        "url" : sdkPath + "/courses?query="+encodeURI(JSON.stringify(query)),
+        "type" : "GET",
+        "dataType" : "json",
+        "contentType" : "application/json",
+    }).success(function(data){
         if (data.data && data.data.length)
             $("#NoDataWarning").hide();
         else
