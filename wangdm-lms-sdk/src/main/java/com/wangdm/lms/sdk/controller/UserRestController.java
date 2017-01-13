@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangdm.core.constant.EntityStatus;
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.dto.StatusDto;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.user.dto.CertificationDto;
 import com.wangdm.user.dto.GroupDto;
 import com.wangdm.user.dto.RoleDto;
@@ -49,18 +49,18 @@ public class UserRestController extends BaseRestController {
  		strParam = request.getParameter("page");
 		if (StringUtils.isNotBlank(strParam)) {
 			pageNum = Integer.parseInt(strParam);
-			query.setCurrentPage(pageNum);
+			query.setPage(pageNum);
 		}
 		
 		strParam = request.getParameter("count");
 		if (StringUtils.isNotBlank(strParam)) {
 			pageCount = Integer.parseInt(strParam);
-	        query.setPageSize(pageCount);
+	        query.setSize(pageCount);
 		}
         
         strParam = request.getParameter("name");
         if (StringUtils.isNotBlank(strParam)) {
-            query.setUsername(strParam);
+            query.setName(strParam);
         }
         
         strParam = request.getParameter("email");
@@ -76,24 +76,23 @@ public class UserRestController extends BaseRestController {
         strParam = request.getParameter("gid");
         if (StringUtils.isNotBlank(strParam)) {
             Long groupId = Long.parseLong(strParam);
-            query.setGroupId(groupId);
+            query.setGroup(groupId);
+        }
+        
+        strParam = request.getParameter("status");
+        if (StringUtils.isNotBlank(strParam)) {
+            EntityStatus status = EntityStatus.valueOf(strParam);
+            query.setStatus(status);
         }
 		
-		query.addStatus(EntityStatus.NORMAL);
-        query.addStatus(EntityStatus.UNAUTHORIZED);
-        query.addStatus(EntityStatus.FORBIDDEN);
-        query.addStatus(EntityStatus.DELETE);
-		
-		List<Dto> data=userService.query(query);
+        QueryResult result = userService.query(query);
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("data", data);
-		map.put("totalCount", query.getTotalCount());
-		map.put("totalPage", query.getTotalPage());
-		map.put("currentPage", query.getCurrentPage());
-		if(data!=null){
-	        map.put("currentCount", data.size());
-		}
-		map.put("pageSize", query.getPageSize());
+        map.put("data", result.getDtoList());
+        map.put("totalCount", result.getAmount());
+        map.put("totalPage", result.getTotalPage());
+        map.put("currentPage", result.getCurrentPage());
+        map.put("currentCount", result.getCurrentSize());
+        map.put("pageSize", result.getPageSize());
 		
 		return map;
 	}

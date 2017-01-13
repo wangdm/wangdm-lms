@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.dto.StatusDto;
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.PageQuery;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.user.dto.PermissionDto;
 import com.wangdm.user.dto.RoleDto;
 import com.wangdm.user.service.RoleService;
@@ -36,26 +36,26 @@ public class RoleRestController extends BaseRestController {
 		
 		String strParam;
 		
-		BaseQuery query = new BaseQuery();
+		PageQuery query = new PageQuery();
 		
 		strParam = request.getParameter("page");
 		if(strParam!=null && !strParam.equals("")){
-			query.setCurrentPage(Integer.parseInt(strParam));
+			query.setPage(Integer.parseInt(strParam));
 		}
 		
 		strParam = request.getParameter("count");
 		if(strParam!=null && !strParam.equals("")){
-			query.setPageSize(Integer.parseInt(strParam));
+			query.setSize(Integer.parseInt(strParam));
 		}
 		
-		List<Dto> data = roleService.query(query);
+		QueryResult result = roleService.query(query);
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("data", data);
-		map.put("totalCount", query.getTotalCount());
-		map.put("totalPage", query.getTotalPage());
-		map.put("currentPage", query.getCurrentPage());
-		map.put("currentCount", data.size());
-		map.put("pageSize", query.getPageSize());
+        map.put("data", result.getDtoList());
+        map.put("totalCount", result.getAmount());
+        map.put("totalPage", result.getTotalPage());
+        map.put("currentPage", result.getCurrentPage());
+        map.put("currentCount", result.getCurrentSize());
+        map.put("pageSize", result.getPageSize());
 		
 		return map;
 	}

@@ -16,6 +16,7 @@ import com.wangdm.core.constraint.ConstraintFactory;
 import com.wangdm.core.dao.Dao;
 import com.wangdm.core.dto.Dto;
 import com.wangdm.core.query.Query;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.core.service.BaseService;
 import com.wangdm.lms.config.dto.KeyValueDto;
 import com.wangdm.lms.config.entity.KeyValue;
@@ -71,7 +72,7 @@ public class KeyValueServiceImpl extends BaseService<KeyValue> implements KeyVal
 	}
 
 	@Override
-	public List<Dto> query(Query query) {
+	public QueryResult query(Query query) {
 		log.warn("Unimplement method! you shouldn't call it.");
 		return null;
 	}

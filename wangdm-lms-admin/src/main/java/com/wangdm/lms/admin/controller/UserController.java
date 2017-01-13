@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wangdm.core.dto.Dto;
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.PageQuery;
 import com.wangdm.user.service.RoleService;
 
 @Controller
@@ -25,8 +25,8 @@ public class UserController {
 		
 		ModelAndView mv = new ModelAndView("action-listuser");
 		
-        BaseQuery query = new BaseQuery();
-        List<Dto> roleList = roleService.query(query);
+        PageQuery query = new PageQuery();
+        List<Dto> roleList = roleService.query(query).getDtoList();
         mv.addObject("roleList", roleList);
 		
 		return mv;

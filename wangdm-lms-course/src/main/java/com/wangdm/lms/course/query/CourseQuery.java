@@ -3,10 +3,10 @@ package com.wangdm.lms.course.query;
 import java.util.List;
 import java.util.Map;
 
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.PageQuery;
 import com.wangdm.lms.course.constant.CourseStatus;
 
-public class CourseQuery  extends BaseQuery{
+public class CourseQuery extends PageQuery{
     
     private String title;
     

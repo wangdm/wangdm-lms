@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wangdm.core.constant.EntityStatus;
+import com.wangdm.core.constant.OrderType;
 import com.wangdm.core.constraint.Constraint;
 import com.wangdm.core.constraint.ConstraintFactory;
-import com.wangdm.core.constraint.Order.OrderType;
 import com.wangdm.core.dao.Dao;
 import com.wangdm.core.service.BaseService;
 import com.wangdm.lms.course.dto.AttributeNameDto;
@@ -55,7 +55,8 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         
         constraint.addEqualCondition("status", EntityStatus.NORMAL);
         
-        constraint.addOrder("index", OrderType.ASC);
+        constraint.setOrderProperty("index");
+        constraint.setOrderType(OrderType.ASC);
         
         List<Category> entityList = categoryDao.findByConstraint(constraint);
         if(entityList == null || entityList.size()<=0){
@@ -108,7 +109,8 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         
         constraint.addEqualCondition("status", EntityStatus.NORMAL);
         
-        constraint.addOrder("index", OrderType.ASC);
+        constraint.setOrderProperty("index");
+        constraint.setOrderType(OrderType.ASC);
         
         List<AttributeName> nameList = attributeNameDao.findByConstraint(constraint);
         if(nameList == null || nameList.size()<=0){

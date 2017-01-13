@@ -2,7 +2,6 @@ package com.wangdm.lms.sdk.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.dto.StatusDto;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.lms.course.dto.CourseDto;
 import com.wangdm.lms.course.query.CourseQuery;
 import com.wangdm.lms.course.service.CourseService;
@@ -35,12 +34,12 @@ public class CourseRestController extends BaseRestController {
     public Map<String,Object> getAll(@RequestParam("query") String querystr, HttpServletRequest request){
         
         CourseQuery query = new CourseQuery();
-        List<Dto> data = courseService.query(query);
+        QueryResult result = courseService.query(query);
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("data", data);
-        map.put("totalCount", query.getTotalPage());
-        map.put("totalPage", query.getTotalPage());
-        map.put("currentPage", query.getCurrentPage());
+        map.put("data", result.getDtoList());
+        map.put("totalCount", result.getAmount());
+        map.put("totalPage", result.getTotalPage());
+        map.put("currentPage", result.getCurrentPage());
         
         return map;
     }

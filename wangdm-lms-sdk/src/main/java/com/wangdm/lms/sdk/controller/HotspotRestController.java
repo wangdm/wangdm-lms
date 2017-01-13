@@ -2,7 +2,6 @@ package com.wangdm.lms.sdk.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.dto.StatusDto;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.ui.dto.HotspotDto;
 import com.wangdm.ui.query.HotspotQuery;
 import com.wangdm.ui.service.HotspotService;
@@ -42,20 +41,20 @@ public class HotspotRestController extends BaseRestController {
 		if(strParam!=null && !strParam.equals("")){
 			pageNum = Integer.parseInt(strParam);
 		}
-		query.setCurrentPage(pageNum);
+		query.setPage(pageNum);
 		
 		strParam = request.getParameter("count");
 		if(strParam!=null && !strParam.equals("")){
 			pageCount = Integer.parseInt(strParam);
 		}
-		query.setPageSize(pageCount);
+		query.setSize(pageCount);
 		
-		List<Dto> data = hotspotService.query(query);
+		QueryResult result = hotspotService.query(query);
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("data", data);
-		map.put("totalCount", query.getTotalPage());
-		map.put("totalPage", query.getTotalPage());
-		map.put("currentPage", query.getCurrentPage());
+        map.put("data", result.getDtoList());
+        map.put("totalCount", result.getAmount());
+        map.put("totalPage", result.getTotalPage());
+        map.put("currentPage", result.getCurrentPage());
 		
 		return map;
 	}

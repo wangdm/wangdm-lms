@@ -1,8 +1,8 @@
 package com.wangdm.lms.course.query;
 
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.PageQuery;
 
-public class VideoQuery extends BaseQuery {
+public class VideoQuery extends PageQuery {
   
     private String title;
     private String userId;

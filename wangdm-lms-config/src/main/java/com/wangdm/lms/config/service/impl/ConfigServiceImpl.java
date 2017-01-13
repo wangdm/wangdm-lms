@@ -17,6 +17,7 @@ import com.wangdm.core.constraint.ConstraintFactory;
 import com.wangdm.core.dao.Dao;
 import com.wangdm.core.dto.Dto;
 import com.wangdm.core.query.Query;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.lms.config.entity.KeyValue;
 import com.wangdm.lms.config.service.ConfigService;
 
@@ -112,7 +113,7 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
-    public List<Dto> query( Query query ) {
+    public QueryResult query( Query query ) {
 
         log.warn("unimplement method!");
         return null;

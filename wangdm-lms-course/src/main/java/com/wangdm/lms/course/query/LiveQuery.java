@@ -3,10 +3,10 @@ package com.wangdm.lms.course.query;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wangdm.core.query.BaseQuery;
+import com.wangdm.core.query.PageQuery;
 import com.wangdm.lms.course.constant.LiveStatus;
 
-public class LiveQuery extends BaseQuery {
+public class LiveQuery extends PageQuery {
 	
 	private String userId = "";
 	

@@ -2,12 +2,12 @@ package com.wangdm.lms.sdk.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.dto.StatusDto;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.user.dto.PermissionDto;
 import com.wangdm.user.query.PermissionQuery;
 import com.wangdm.user.service.PermissionService;
@@ -39,26 +39,28 @@ public class PermissionRestController extends BaseRestController {
 		
 		strParam = request.getParameter("groupId");
 		if(strParam!=null && !strParam.equals("")){
-			query.setGroupId(Long.parseLong(strParam));
+			query.setGroup(Long.parseLong(strParam));
 		}
+        
+        strParam = request.getParameter("page");
+        if (StringUtils.isNotBlank(strParam)) {
+            Integer pageNum = Integer.parseInt(strParam);
+            query.setPage(pageNum);
+        }
 		
 		strParam = request.getParameter("count");
 		if(strParam!=null && !strParam.equals("")){
-			query.setPageSize(Integer.parseInt(strParam));
+			query.setSize(Integer.parseInt(strParam));
 		}
 		
-		List<Dto> data = permissionService.query(query);
+		QueryResult result = permissionService.query(query);
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("data", data);
-		map.put("totalCount", query.getTotalCount());
-		map.put("totalPage", query.getTotalPage());
-		map.put("currentPage", query.getCurrentPage());
-		if(data!=null){
-			map.put("currentCount", data.size());
-		}else{
-			map.put("currentCount", 0);
-		}
-		map.put("pageSize", query.getPageSize());
+        map.put("data", result.getDtoList());
+        map.put("totalCount", result.getAmount());
+        map.put("totalPage", result.getTotalPage());
+        map.put("currentPage", result.getCurrentPage());
+        map.put("currentCount", result.getCurrentSize());
+        map.put("pageSize", result.getPageSize());
 		
 		return map;
 	}

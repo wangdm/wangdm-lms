@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangdm.core.dto.Dto;
 import com.wangdm.core.dto.StatusDto;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.user.dto.GroupDto;
 import com.wangdm.user.dto.GroupTreeDto;
 import com.wangdm.user.query.GroupQuery;
@@ -40,25 +40,25 @@ public class GroupRestController extends BaseRestController {
 		
 		strParam = request.getParameter("parentId");
 		if(strParam!=null && !strParam.equals("")){
-			query.setParentId(Long.parseLong(strParam));
+			query.setParent(Long.parseLong(strParam));
 		}
 		
 		strParam = request.getParameter("page");
 		if(strParam!=null && !strParam.equals("")){
-			query.setCurrentPage(Integer.parseInt(strParam));
+			query.setPage(Integer.parseInt(strParam));
 		}
 		
 		strParam = request.getParameter("count");
 		if(strParam!=null && !strParam.equals("")){
-			query.setPageSize(Integer.parseInt(strParam));
+			query.setPage(Integer.parseInt(strParam));
 		}
 		
-		List<Dto> data = groupService.query(query);
+		QueryResult result = groupService.query(query);
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("data", data);
-		map.put("totalCount", query.getTotalPage());
-		map.put("totalPage", query.getTotalPage());
-		map.put("currentPage", query.getCurrentPage());
+        map.put("data", result.getDtoList());
+        map.put("totalCount", result.getAmount());
+        map.put("totalPage", result.getTotalPage());
+        map.put("currentPage", result.getCurrentPage());
 		
 		return map;
 	}
