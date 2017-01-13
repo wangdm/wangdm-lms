@@ -7,7 +7,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.wangdm.core.constant.EntityStatus;
 import com.wangdm.core.entity.BaseEntity;
 
 /*
@@ -122,10 +121,9 @@ public class KeyValue extends BaseEntity{
 	
 	  //系统状态
     public static String systemStatus= "systemStatus";
-
-	public KeyValue(){
-		this.setStatus(EntityStatus.NORMAL);
-	}
+    
+    public KeyValue(){
+    }
 	
 	public KeyValue(String key, String value){
 		this.key = key;
