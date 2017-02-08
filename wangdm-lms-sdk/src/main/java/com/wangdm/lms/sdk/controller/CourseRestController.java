@@ -36,10 +36,12 @@ public class CourseRestController extends BaseRestController {
         CourseQuery query = new CourseQuery();
         QueryResult result = courseService.query(query);
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("data", result.getDtoList());
-        map.put("totalCount", result.getAmount());
-        map.put("totalPage", result.getTotalPage());
-        map.put("currentPage", result.getCurrentPage());
+        if(result!=null){
+            map.put("data", result.getDtoList());
+            map.put("totalCount", result.getAmount());
+            map.put("totalPage", result.getTotalPage());
+            map.put("currentPage", result.getCurrentPage());
+        }
         
         return map;
     }

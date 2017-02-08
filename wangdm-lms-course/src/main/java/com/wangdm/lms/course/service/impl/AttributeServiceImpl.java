@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wangdm.core.constant.EntityStatus;
 import com.wangdm.core.constant.EntityType;
 import com.wangdm.core.constraint.Constraint;
 import com.wangdm.core.constraint.ConstraintFactory;
@@ -192,8 +191,6 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         
         constraint.addEqualCondition("name.id", attributeId);
         
-        constraint.addEqualCondition("status", EntityStatus.NORMAL);
-        
         List<AttributeValue> entityList = attributeValueDao.findByConstraint(constraint);
         if(entityList == null || entityList.size()<=0){
             return null;
@@ -219,8 +216,6 @@ public class AttributeServiceImpl extends BaseService<AttributeName> implements 
         constraint.addEqualCondition("entityType", entityType);
         
         constraint.addEqualCondition("entityId", entityId);
-        
-        constraint.addEqualCondition("status", EntityStatus.NORMAL);
         
         List<AttributeMap> entityList = attributeMapDao.findByConstraint(constraint);
         if(entityList == null || entityList.size()<=0){

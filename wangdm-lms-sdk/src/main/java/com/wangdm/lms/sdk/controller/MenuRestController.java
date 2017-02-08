@@ -51,10 +51,12 @@ public class MenuRestController extends BaseRestController {
 		
 		QueryResult result = menuService.query(query);
 		Map<String,Object> map=new HashMap<String, Object>();
-        map.put("data", result.getDtoList());
-        map.put("totalCount", result.getAmount());
-        map.put("totalPage", result.getTotalPage());
-        map.put("currentPage", result.getCurrentPage());
+        if(result!=null){
+            map.put("data", result.getDtoList());
+            map.put("totalCount", result.getAmount());
+            map.put("totalPage", result.getTotalPage());
+            map.put("currentPage", result.getCurrentPage());
+        }
 		
 		return map;
 	}
@@ -66,7 +68,6 @@ public class MenuRestController extends BaseRestController {
 			response.sendError(401);
 			return null;
 		}
-		menu.setStatus("NORMAL");
         menu.setType("NAVIGATION");
 		menuService.create(menu);
 		return new StatusDto(200, "success", "");

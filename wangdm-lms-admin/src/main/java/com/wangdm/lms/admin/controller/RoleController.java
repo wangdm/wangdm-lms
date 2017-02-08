@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wangdm.core.dto.Dto;
 import com.wangdm.core.query.PageQuery;
+import com.wangdm.core.query.QueryResult;
 import com.wangdm.user.dto.PermissionGroupDto;
 import com.wangdm.user.query.PermissionQuery;
 import com.wangdm.user.service.PermissionGroupService;
@@ -38,7 +39,10 @@ public class RoleController {
 		for(int i=0; i<permissionGroupList.size(); i++ ){
 			PermissionGroupDto groupDto = (PermissionGroupDto)permissionGroupList.get(i);
 			query.setGroup(Long.parseLong(groupDto.getId()));
-			groupDto.setPermList(permissionService.query(query).getDtoList());
+			QueryResult result = permissionService.query(query);
+			if(result!=null){
+	            groupDto.setPermList(result.getDtoList());
+			}
 			
 		}
         mv.addObject("permissionGroupList", permissionGroupList);

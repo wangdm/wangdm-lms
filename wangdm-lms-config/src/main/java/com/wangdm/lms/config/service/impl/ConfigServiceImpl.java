@@ -1,7 +1,6 @@
 package com.wangdm.lms.config.service.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wangdm.core.constant.EntityStatus;
 import com.wangdm.core.constraint.Constraint;
 import com.wangdm.core.constraint.ConstraintFactory;
 import com.wangdm.core.dao.Dao;
@@ -91,10 +89,6 @@ public class ConfigServiceImpl implements ConfigService {
         Constraint constraint = constraintFactory.createConstraint(KeyValue.class);
 
         constraint.addEqualCondition("key", key);
-
-        List<EntityStatus> entityTypeList = new ArrayList<EntityStatus>();
-        entityTypeList.add(EntityStatus.NORMAL);
-        constraint.addEqualCondition("status", entityTypeList);
 
         List<KeyValue> menuList = keyvalueDao.findByConstraint(constraint);
 

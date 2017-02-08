@@ -55,7 +55,6 @@ public class KeyValueServiceImpl extends BaseService<KeyValue> implements KeyVal
         constraint.addEqualCondition("key", key);
         
         List<EntityStatus> entityTypeList = new ArrayList<EntityStatus>();
-        entityTypeList.add(EntityStatus.NORMAL);
         constraint.addEqualCondition("status", entityTypeList);
         
         List<KeyValue> menuList = keyvalueDao.findByConstraint(constraint);

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wangdm.core.constant.EntityStatus;
 import com.wangdm.core.constant.OrderType;
 import com.wangdm.core.constraint.Constraint;
 import com.wangdm.core.constraint.ConstraintFactory;
@@ -52,8 +51,6 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         Constraint constraint = constraintFactory.createConstraint(Category.class);
         
         constraint.addEqualCondition("parent.id", id);
-        
-        constraint.addEqualCondition("status", EntityStatus.NORMAL);
         
         constraint.setOrderProperty("index");
         constraint.setOrderType(OrderType.ASC);
@@ -106,8 +103,6 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         Constraint constraint = constraintFactory.createConstraint(AttributeName.class);
         
         constraint.addEqualCondition("category.id", id);
-        
-        constraint.addEqualCondition("status", EntityStatus.NORMAL);
         
         constraint.setOrderProperty("index");
         constraint.setOrderType(OrderType.ASC);
